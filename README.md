@@ -26,8 +26,13 @@ Développé dans le cadre d'une formation pour permettre une monté en compéten
 
 <img src="doc/Maquette.png" alt="drawing" width="500"/>
 
-- **Déroulé d'une partie :** [Expliquer comment se déroule une partie.]
-- **Conditions de Victoire :** [Décrire les conditions pour remporter la partie.]
+- **Déroulé d'une partie :**
+    - Les joueurs apparaissent dans un des 4 labyrinthes.
+    - Des pièces apparaissent (nombre défini par l'admin) à une position aléatoire dans les 4 labyrinthes.
+    - Les joueurs peuvent se déplacer dans les labyrinthes.
+    - Dès qu'il n'y a plus de pièce, les labyrinthes sont réinitialisés.
+
+- **Conditions de Victoire :** Etre le joueur ayant ramassé le plus de pièce.
 
 ## 🎮 Use Cases
 
@@ -38,7 +43,7 @@ Un administrateur peut/doit :
 
 ### Pour le Joueur
 
-Pour les informations sur le joueur, veuillez vous référer au README de l'API. [lien vers le readme]
+Pour les informations sur le joueur, veuillez vous référer au [README](/src/api/README.md) de l'API. 
 
 ## 🖧 Architecture Matériel (Optionnel)
 
@@ -57,7 +62,7 @@ Pour les informations sur le joueur, veuillez vous référer au README de l'API.
 
 ### Pour les Apprenants
 
-Pour les prérequis des apprenants, veuillez vous référer au README de l'API. [lien du readme]
+Pour les prérequis des apprenants, veuillez vous référer au [README](/src/api/README.md) de l'API.
 
 ## ⚙️ Installation
 
