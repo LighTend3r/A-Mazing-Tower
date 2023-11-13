@@ -1,4 +1,4 @@
-# <img src="./A-Mazing-Tower-Logo.jpg" alt="drawing" width="40"/> A-Mazing-Tower
+# <img src="doc/A-Mazing-Tower-Logo.jpg" alt="drawing" width="40"/> A-Mazing-Tower
 
 ## Description:
 Bienvenue dans "A Mazing Tower" ! Un jeu de labyrinthe passionnant où vous devez explorer quatre salles labyrinthiques et collecter des pièces pour atteindre la victoire.
@@ -22,7 +22,10 @@ Développé dans le cadre d'une formation pour permettre une monté en compéten
 
 ## 🎲 Règles du Jeu
 
-- **Maquette :** [Insérer des détails sur la maquette du jeu.]
+- **Maquette :**
+
+<img src="doc/Maquette.png" alt="drawing" width="500"/>
+
 - **Déroulé d'une partie :** [Expliquer comment se déroule une partie.]
 - **Conditions de Victoire :** [Décrire les conditions pour remporter la partie.]
 
