@@ -5,7 +5,7 @@ Bienvenue dans "A Mazing Tower" ! Un jeu de labyrinthe passionnant où vous deve
 
 ## 🎯 Contexte & Cahier des Charges
 
-Développé dans le cadre d'une formation pour permettre une monté en compétence en Python, ce jeu vise à [insérer l'objectif pédagogique].
+Développé dans le cadre d'une formation pour permettre une monté en compétence en Python, ce jeu vise à apprendre les bonnes pratique de programmation de manière ludique.
 
 ### Backlog:
 |id|description|priorité|
@@ -16,9 +16,6 @@ Développé dans le cadre d'une formation pour permettre une monté en compéten
 |4|En tant qu'utilisateur, je peux ramasser des pièces|2|
 |5|En tant qu'utilisateur, je peux me déplacer entre les salles avec un "téléporteur"|3|
 |6|En tant qu'utilisateur, je peux ramasser des bonus/malus|4|
-
-
-
 
 ## 🎲 Règles du Jeu
 
@@ -52,6 +49,13 @@ Pour les informations sur le joueur, veuillez vous référer au [README](/src/ap
 ## 📞 Diagramme de Séquence
 
 [Expliquer le déroulé d'une partie à l'aide d'un diagramme de séquence. Décrire les principales étapes et comment les couches s'échangent des données.]
+Expliquer les points suivants:
+- [ ] les acteurs
+- [ ] le déroulé d'une partie en partant des use case
+- [ ] les données échangées entre chaque couche
+- [ ] les algorithmes
+- [ ] les machines
+- [ ] les protocoles réseaux
 
 ## ✅ Pré-requis
 
@@ -66,7 +70,7 @@ Pour les prérequis des apprenants, veuillez vous référer au [README](/src/api
 
 ## ⚙️ Installation
 
-1. 
+Step by step : commandes à executer par l'administrateur, paquets à installer ...
 
 ## 🧪 Tests
 
@@ -76,17 +80,23 @@ Pour les prérequis des apprenants, veuillez vous référer au [README](/src/api
 
 ### Étapes pour Lancer les Tests
 
-1. 
 
 ## 🛣️ Roadmap
 
 [Insérer la roadmap du projet, décrivant les fonctionnalités futures, les améliorations, etc.]
+Ce qui reste à faire priorisé dans le temps
 
 ## 🧑‍💻 Auteur
 
-Thomas FEDORAWIEZ, Pierre TOITOT, HARNOIS Léo, Antoine CLERICE
+- Antoine CLERICE
+- Thomas FEDORAWIEZ
+- Léo HARNOIS
+- Pierre TOITOT
 
 ## ⚖️ Licence
 
 Ce projet est sous licence [Insérer le type de licence]. Consultez le fichier `LICENSE.md` pour plus d'informations.
+
+S'appuyer sur https://choosealicense.com/ ou la doc de github
+Attention à vérifier la compatibilité de votre licence avec celles des modules utilisés
 

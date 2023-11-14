@@ -1,44 +1,24 @@
-# <img src="./A-Mazing-Tower-Logo.jpg" alt="drawing" width="40"/> A-Mazing-Tower
+# <img src="../../doc/A-Mazing-Tower-Logo.jpg" alt="drawing" width="40"/> A-Mazing-Tower
 
 ## Description:
 Bienvenue dans "A Mazing Tower" ! Un jeu de labyrinthe passionnant où vous devez explorer quatre salles labyrinthiques et collecter des pièces pour atteindre la victoire.
 
-## 🎲 Règles du Jeu
+## 🎲 Règles du jeu 
+Maquette, déroulé d'une partie, conditions de victoire
 
-- **Maquette :** [Insérer des détails sur la maquette du jeu.]
-- **Déroulé d'une partie :** [Expliquer comment se déroule une partie.]
-- **Conditions de Victoire :** [Décrire les conditions pour remporter la partie.]
-
-## 🎮 Use Cases
-
-### Actions Possibles du Joueur via l'API
-
-Les joueurs peuvent effectuer les actions suivantes via l'API :
-
-1. je peux récupérer la carte 	
-2. je peux voir mes points 	
-3. je peux me déplacer dans la salle où je suis 
-4. je peux ramasser des pièces 	
-5. je peux me déplacer entre les salles avec un "téléporteur" 	
+## 🎮 Use cases
+Actions possibles du joueur via l'API
 
 ## ✅ Pré-requis
+Matériel et logiciel requis pour executer votre projet
 
-### Matériel Requis
+## ⚙️ Installation 
+Step by step : commandes à executer, paquets à installer ...
 
-- [Liste du matériel requis pour les joueurs.]
+## 🧑‍💻 Auteur(s)
+Rendre à César ce qui appartient à César !
+N'oublier pas de citer toutes les personnes qui ont contribué directement (vous) ou indirectement (les auteurs des dépendances de votre projet, des ressources récupérées ou générées ...)
 
-### Logiciel Requis
-
-- [Liste du logiciel requis pour les joueurs.]
-
-## ⚙️ Installation
-
-1. 
-
-## 🧑‍💻 Auteur
-
-Thomas FEDORAWIEZ, Pierre TOITOT, HARNOIS Léo, Antoine CLERICE
-
-## ⚖️ Licence
-
-Ce projet est sous licence [Insérer le type de licence]. Consultez le fichier `LICENSE.md` pour plus d'informations.
+## ⚖️ License
+S'appuyer sur https://choosealicense.com/ ou la doc de github
+Attention à vérifier la compatibilité de votre licence avec celles des modules utilisés
