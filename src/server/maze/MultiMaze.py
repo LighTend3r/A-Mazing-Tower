@@ -9,6 +9,7 @@ class MultiMaze:
         self.__wall: int | str = wall
         self.__floor: int | str = floor
         self.__coin: int | str = coin
+        self.__nbPortal = 0
 
     def get_column(self) -> int:
         """Récupère le nombre de colonne
@@ -44,6 +45,21 @@ class MultiMaze:
         """Récupère un labyrinthe en position x,y
         """
         return self.__grid[x][y]
+
+    def get_nb_portal(self) -> int:
+        """Récupère le nombre de portail
+        """
+        return self.__nbPortal
+
+    def get_next_portal_number(self) -> int | str:
+        """Récupère le prochain numéro de portail
+        """
+        self.__nbPortal += 1
+        if type(self.__wall) == int:
+            return max(self.__wall, self.__floor, self.__coin) + self.__nbPortal
+
+
+        return "P" + str(self.__nbPortal)
 
     def get_all_row(self) -> int:
         """Récupère le nombre de ligne de la grille de labyrinthe complèter par les sous-labyrinthes
@@ -84,6 +100,6 @@ class MultiMaze:
         msg = ""
         for i in self.get_all_maze():
             for j in i:
-                msg += str(j)
+                msg += str(j) + " "
             msg += "\n"
         return msg
