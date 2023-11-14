@@ -58,5 +58,20 @@ agent.ruleArena("map", maze.get_all_maze())
 agent.ruleArena("mapImgs", MAP_IMGS)
 agent.ruleArena("mapFriction", MAP_FRICTION)
 
+agent.ruleArena("profiles", ['runner'])
+agent.ruleArena("pIcons", [''])
+agent.ruleArena("weapons", ['none'])
+agent.ruleArena("hitCollision", [0])
+agent.ruleArena("collision", [False])
+
+
+agent.ruleArena("teamNb", [False])
+
+agent.ruleArena("api", "https://blog.lightender.fr/tkt/")
+agent.ruleArena("help", "https://blog.lightender.fr/tkt/")
+
+
+
+
 time.sleep(5)
 agent.update()
