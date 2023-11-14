@@ -1,15 +1,25 @@
 import j2l.pytactx.agent as pytactx
 import os
 import time
+from decouple import config
 
-agent = pytactx.Agent(playerId=os.getenv('PLAYER_ID'),
-						arena=os.getenv('ARENA'),
-						username=os.getenv('USERNAME'),
-						password=os.getenv('PASSWORD'),
-						server=os.getenv('SERVER'),
-						verbosity=2)
+ARENA = config('ARENA_PYTACTX')
+PLAYER_ID = config('PLAYER_ID_PYTACTX')
+USERNAME = config('USERNAME_PYTACTX')
+PASS = config('PASS_PYTACTX')
+SERVEUR = config('SERVEUR_PYTACTX')
 
-agent.ruleArena("desc", "coucou")
+print(ARENA, PLAYER_ID, USERNAME, PASS, SERVEUR)
+
+
+agent = pytactx.Agent(playerId=PLAYER_ID,
+                        arena=ARENA,
+                        username=PASS,
+                        password=PASS,
+                        server=SERVEUR,
+                        verbosity=2)
+
+agent.ruleArena("desc", 'Collectez des pièces pour atteindre la victoire.')
 agent.ruleArena("bgImg", "gta5.jpg")
 
 time.sleep(5)
