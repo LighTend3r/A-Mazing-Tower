@@ -6,6 +6,7 @@ import time
 
 import maze.Maze as Maze
 import maze.MakeMaze as MakeMaze
+import maze.MultiMaze as MultiMaze
 
 
 
@@ -34,13 +35,13 @@ map = agent.map
 
 makeMaze = MakeMaze.MakeMaze()
 makeMaze.setFloor(2)
-maze:Maze.Maze = makeMaze.makeMultiMaze(22,22,2,2,10)
-print(maze.get_column())
-agent.ruleArena("gridColumns", maze.get_column())
-agent.ruleArena("gridRows", maze.get_row())
+maze:MultiMaze.MultiMaze = makeMaze.makeMultiMaze(22,22,2,2,p=10)
+
+agent.ruleArena("gridColumns", maze.get_all_column())
+agent.ruleArena("gridRows", maze.get_all_row())
 
 
-agent.ruleArena("map", maze.get_grid())
+agent.ruleArena("map", maze.get_all_maze())
 agent.ruleArena("mapImgs", ["","ironblock.jpg", "grass.jpg"])
 agent.ruleArena("mapFriction", [0,1,0])
 

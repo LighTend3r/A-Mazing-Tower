@@ -20,3 +20,11 @@ class Maze:
 
     def get_floor(self):
         return self.__floor
+
+    def __str__(self):
+        msg = ""
+        for i in self.get_grid():
+            for j in i:
+                msg += str(j) + " "
+            msg += "\n"
+        return msg

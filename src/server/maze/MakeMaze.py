@@ -1,4 +1,5 @@
 import maze.Maze as Maze
+import maze.MultiMaze as MultiMaze
 from typing import List
 import random
 import sys
@@ -17,7 +18,7 @@ class MakeMaze:
     def setWall(self, wall):
         self.__wall = wall
 
-    def makeMultiMaze(self, taille_row:int = 10, taille_column:int = 10, row:int = 1, column:int = 1, p: int = 0) -> Maze:
+    def makeMultiMaze(self, taille_row:int = 10, taille_column:int = 10, row:int = 1, column:int = 1, p: int = 0) -> MultiMaze:
         """Créé un labyrinthe avec des labyrinthes plus petit
 
         Args:
@@ -30,6 +31,7 @@ class MakeMaze:
         Returns:
             Maze: _description_
         """
+
         assert p >= 0 and p <= 100, "p doit être compris entre 0 et 100 (c'est une probabilité)"
         assert row > 0 and column > 0, "row et column doivent être supérieur à 0"
         assert taille_row > 0 and taille_column > 0, "taille_row et taille_column doivent être supérieur à 0"
@@ -37,20 +39,25 @@ class MakeMaze:
         if self.__debug > 0:
             print(taille_row * row + 2 + row-1, taille_column * column + 2 + column-1)
 
-        maze = Maze.Maze(taille_row * row + 2 + row-1, taille_column * column + 2 + column-1, self.__wall, self.__floor)
-        for i in range(1,maze.get_row(), taille_row+1):
-            for j in range(1,maze.get_column(), taille_column+1):
-                self.__makeMaze(maze, [[i, j], [i+taille_row, j+taille_row]])
+        multiMaze = MultiMaze.MultiMaze(row, column, self.__wall, self.__floor)
+        grid = multiMaze.get_grid()
+
+
+        for i in range(row):
+            for j in range(column):
+                maze = Maze.Maze(taille_row, taille_column, self.__wall, self.__floor)
+                self.__makeMaze(maze)
                 if p > 0:
-                    nb_wall = self.__countWall(maze, [[i, j], [i+taille_row, j+taille_row]])
+                    nb_wall = self.__countWall(maze)
                     nb_wall_delete = int(nb_wall * (p/100))
                     if self.__debug > 0:
                         print("On supprime", nb_wall_delete, "murs")
-                    self.__deleteWall(maze, nb_wall_delete, [[i, j], [i+taille_row, j+taille_row]])
+                    self.__deleteWall(maze, nb_wall_delete)
+                grid[i][j] = maze
+        multiMaze.set_grid(grid)
 
 
-
-        return maze
+        return multiMaze
 
     def __deleteWall(self, maze: Maze, nb_wall_delete:int, plan:List[List[int]]=[[-1, -1,], [-1, -1]]):
         start_x = 0 if plan[0][0] == -1 else plan[0][0]
@@ -81,8 +88,8 @@ class MakeMaze:
     def __countWall(self, maze: Maze,plan:List[List[int]]=[[-1, -1,], [-1, -1]]):
         start_x = 0 if plan[0][0] == -1 else plan[0][0]
         start_y = 0 if plan[0][1] == -1 else plan[0][1]
-        end_x = maze.get_row()-1 if plan[1][0] == -1 else plan[1][0]
-        end_y = maze.get_column()-1 if plan[1][1] == -1 else plan[1][1]
+        end_x = maze.get_row() if plan[1][0] == -1 else plan[1][0]
+        end_y = maze.get_column() if plan[1][1] == -1 else plan[1][1]
 
         count = 0
         for i in range(start_x, end_x):
@@ -96,13 +103,12 @@ class MakeMaze:
 
         Args:
             maze (Maze): Labyrinthe à modifier
-            void (str, optional): String à mettre en tant que block vide. Defaults to ' '.
         """
 
         start_x = 0 if plan[0][0] == -1 else plan[0][0]
         start_y = 0 if plan[0][1] == -1 else plan[0][1]
-        end_x = maze.get_row()-1 if plan[1][0] == -1 else plan[1][0]
-        end_y = maze.get_column()-1 if plan[1][1] == -1 else plan[1][1]
+        end_x = maze.get_row() if plan[1][0] == -1 else plan[1][0]
+        end_y = maze.get_column() if plan[1][1] == -1 else plan[1][1]
 
 
         x_start = random.randint(start_x,end_x-1)
