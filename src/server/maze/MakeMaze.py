@@ -6,9 +6,10 @@ import sys
 sys.setrecursionlimit(1000000)
 
 class MakeMaze:
-    def __init__(self, wall = 1, floor = 0):
+    def __init__(self, wall = 1, floor = 0, debug:int = 0):
         self.__wall = wall
         self.__floor = floor
+        self.__debug = debug
 
     def setFloor(self, floor):
         self.__floor = floor
@@ -16,15 +17,79 @@ class MakeMaze:
     def setWall(self, wall):
         self.__wall = wall
 
-    def makeMultiMaze(self, taille_row:int = 10, taille_column:int = 10, row:int = 1, column:int = 1) -> Maze:
-        print(taille_row * row + 2 + row-1, taille_column * column + 2 + column-1)
+    def makeMultiMaze(self, taille_row:int = 10, taille_column:int = 10, row:int = 1, column:int = 1, p: int = 0) -> Maze:
+        """Créé un labyrinthe avec des labyrinthes plus petit
+
+        Args:
+            taille_row (int, optional): La taille des lignes de chaque petit labyrinthe. Defaults to 10.
+            taille_column (int, optional): La taille des colonnes de chaque petit labyrinthe. Defaults to 10.
+            row (int, optional): Nombre de labyrinthe en ligne. Defaults to 1.
+            column (int, optional): Nombre de labyrinthe en colonne. Defaults to 1.
+            p (int, optional): Probabilité de supprimer des murs dans le labyrinthe. Defaults to 0.
+
+        Returns:
+            Maze: _description_
+        """
+        assert p >= 0 and p <= 100, "p doit être compris entre 0 et 100 (c'est une probabilité)"
+        assert row > 0 and column > 0, "row et column doivent être supérieur à 0"
+        assert taille_row > 0 and taille_column > 0, "taille_row et taille_column doivent être supérieur à 0"
+
+        if self.__debug > 0:
+            print(taille_row * row + 2 + row-1, taille_column * column + 2 + column-1)
+
         maze = Maze.Maze(taille_row * row + 2 + row-1, taille_column * column + 2 + column-1, self.__wall, self.__floor)
         for i in range(1,maze.get_row(), taille_row+1):
             for j in range(1,maze.get_column(), taille_column+1):
                 self.__makeMaze(maze, [[i, j], [i+taille_row, j+taille_row]])
+                if p > 0:
+                    nb_wall = self.__countWall(maze, [[i, j], [i+taille_row, j+taille_row]])
+                    nb_wall_delete = int(nb_wall * (p/100))
+                    if self.__debug > 0:
+                        print("On supprime", nb_wall_delete, "murs")
+                    self.__deleteWall(maze, nb_wall_delete, [[i, j], [i+taille_row, j+taille_row]])
+
+
 
         return maze
 
+    def __deleteWall(self, maze: Maze, nb_wall_delete:int, plan:List[List[int]]=[[-1, -1,], [-1, -1]]):
+        start_x = 0 if plan[0][0] == -1 else plan[0][0]
+        start_y = 0 if plan[0][1] == -1 else plan[0][1]
+        end_x = maze.get_row()-1 if plan[1][0] == -1 else plan[1][0]
+        end_y = maze.get_column()-1 if plan[1][1] == -1 else plan[1][1]
+        while nb_wall_delete > 0:
+            x = random.randint(start_x, end_x-1)
+            y = random.randint(start_y, end_y-1)
+            if maze.get_grid()[x][y] == self.__wall:
+
+                coo = [(1,0), (-1,0), (0,1), (0,-1)]
+                possible = False
+                for co in coo:
+                    x_new = x + co[0]
+                    y_new = y + co[1]
+                    if x_new >= start_x and x_new < end_x and y_new >= start_y and y_new < end_y:
+                        if maze.get_grid()[x_new][y_new] == self.__floor:
+                            possible = True
+                            break
+
+
+                if possible:
+                    maze.get_grid()[x][y] = self.__floor
+                    nb_wall_delete -= 1
+
+
+    def __countWall(self, maze: Maze,plan:List[List[int]]=[[-1, -1,], [-1, -1]]):
+        start_x = 0 if plan[0][0] == -1 else plan[0][0]
+        start_y = 0 if plan[0][1] == -1 else plan[0][1]
+        end_x = maze.get_row()-1 if plan[1][0] == -1 else plan[1][0]
+        end_y = maze.get_column()-1 if plan[1][1] == -1 else plan[1][1]
+
+        count = 0
+        for i in range(start_x, end_x):
+            for j in range(start_y, end_y):
+                if maze.get_grid()[i][j] == self.__wall:
+                    count += 1
+        return count
 
     def __makeMaze(self, maze: Maze,plan:List[List[int]]=[[-1, -1,], [-1, -1]]):
         """Créé un labyrinthe sans boucle

@@ -34,14 +34,15 @@ map = agent.map
 
 makeMaze = MakeMaze.MakeMaze()
 makeMaze.setFloor(2)
-maze:Maze.Maze = makeMaze.makeMultiMaze(22,22,2,2)
+maze:Maze.Maze = makeMaze.makeMultiMaze(22,22,2,2,10)
 print(maze.get_column())
 agent.ruleArena("gridColumns", maze.get_column())
 agent.ruleArena("gridRows", maze.get_row())
 
 
 agent.ruleArena("map", maze.get_grid())
-
 agent.ruleArena("mapImgs", ["","ironblock.jpg", "grass.jpg"])
+agent.ruleArena("mapFriction", [0,1,0])
+
 time.sleep(5)
 agent.update()

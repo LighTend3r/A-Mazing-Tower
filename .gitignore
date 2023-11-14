@@ -2,3 +2,4 @@
 .code
 .env
 __pycache__
+src/server/test.py
