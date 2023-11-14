@@ -1,19 +1,19 @@
 # -*- coding: utf-8 -*-
-#                           ██╗██████╗ ██╗           
-#                           ██║╚════██╗██║           
-#                           ██║ █████╔╝██║           
-#                      ██   ██║██╔═══╝ ██║           
-#                      ╚█████╔╝███████╗███████╗      
-#                       ╚════╝ ╚══════╝╚══════╝      
+#                           ██╗██████╗ ██╗
+#                           ██║╚════██╗██║
+#                           ██║ █████╔╝██║
+#                      ██   ██║██╔═══╝ ██║
+#                      ╚█████╔╝███████╗███████╗
+#                       ╚════╝ ╚══════╝╚══════╝
 #                       https://jusdeliens.com
 #
 # Designed with 💖 by Jusdeliens
-# Under CC BY-NC-ND 3.0 licence 
-# https://creativecommons.org/licenses/by-nc-nd/3.0/ 
+# Under CC BY-NC-ND 3.0 licence
+# https://creativecommons.org/licenses/by-nc-nd/3.0/
 
-# Allow import without error 
+# Allow import without error
 # "relative import with no known parent package"
-# In vscode, add .env file with PYTHONPATH="..." 
+# In vscode, add .env file with PYTHONPATH="..."
 # with the same dir to allow intellisense
 import sys
 import os
@@ -22,7 +22,7 @@ __libdir__ = os.path.dirname(__workdir__)
 sys.path.append(__libdir__)
 
 os.system("export LANG=en_US.UTF-8")
-os.system("pip install paho-mqtt pillow requests")
+# os.system("pip install paho-mqtt pillow requests")
 
 import random
 import copy
@@ -206,7 +206,7 @@ class RobotRequestBuilder:
 			"hue": "3"
 		}
 	def reset(self):
-		self.__robotActuatorsRequest = {} 
+		self.__robotActuatorsRequest = {}
 		if ( self.__animDuration > 0 ):
 			time.sleep(self.__animDuration/1000.0)
 			self.__animDuration = 0
@@ -222,7 +222,7 @@ class RobotRequestBuilder:
 				params.append("ledb="+str(req["led"]["rgb"][2]))
 			if ( "duration" in req["led"] ):
 				params.append("ledt="+str(req["led"]["duration"]))
-			if ( req["led"]["animation"] != "custom" and 
+			if ( req["led"]["animation"] != "custom" and
        			 req["led"]["animation"] in self.__fromLedAnimationToLedA ):
 				params.append("leda="+self.__fromLedAnimationToLedA[req["led"]["animation"]])
 			elif ( req["led"]["animation"] == "custom" ):
@@ -317,7 +317,7 @@ class RobotRequestBuilder:
 		self.__robotActuatorsRequest["led"] = {
 			"animation":"twinkle",
 			"rgb":[r,g,b],
-			"duration":periodInMsecs, 
+			"duration":periodInMsecs,
 			"repeat":repeat
 		}
 	def setLedFade(self, r:int, g:int, b:int, periodInMsecs:int, repeat:int=0):
@@ -333,7 +333,7 @@ class RobotRequestBuilder:
 		self.__robotActuatorsRequest["led"] = {
 			"animation":"fade",
 			"rgb":[r,g,b],
-			"duration":periodInMsecs, 
+			"duration":periodInMsecs,
 			"repeat":repeat
 		}
 	def setLedHue(self, periodInMsecs:int, repeat:int=0):
@@ -345,7 +345,7 @@ class RobotRequestBuilder:
 			return
 		self.__robotActuatorsRequest["led"] = {
 			"animation":"hue",
-			"duration":periodInMsecs, 
+			"duration":periodInMsecs,
 			"repeat":repeat
 		}
 	def setLedAnimation(self, colors:list[tuple[int,int,int,int]], repeat:int=0):
@@ -522,17 +522,17 @@ class CameraReader:
 		return l
 
 class OvaClientHttp(IRobot):
-	def __init__(self, 
+	def __init__(self,
 		  routeSensors,
 		  routeCamera,
 		  routeActuators,
-	      url:str="http://192.168.4.1", 
-	      imgOutputPath:str or None="img.jpeg", 
-		  verbosity:int=3, 
+	      url:str="http://192.168.4.1",
+	      imgOutputPath:str or None="img.jpeg",
+		  verbosity:int=3,
 		  welcomePrint=True
 		):
 		"""
-		Build an IRobot http client to communicate directly to ova 
+		Build an IRobot http client to communicate directly to ova
 		using http requests/API.
 
 		To be able to use the robot http API, you must
@@ -752,8 +752,8 @@ class OvaClientHttpV1(OvaClientHttp):
 		return state["esp"]["id"]
 	def getBatteryVoltage(self) -> int :
 		state = self.getRobotState()
-		if ( "sensors" not in state or 
-      		"battery" not in state["sensors"] or 
+		if ( "sensors" not in state or
+      		"battery" not in state["sensors"] or
 			"voltage" not in state["sensors"]["battery"] ):
 			return 0
 		return state["sensors"]["battery"]["voltage"]
@@ -763,8 +763,8 @@ class OvaClientHttpV1(OvaClientHttp):
 		return super().getBatteryLevel(voltage)
 	def getFrontLuminosity(self) -> int :
 		state = self.getRobotState()
-		if ( "sensors" not in state or 
-      		"photoFront" not in state["sensors"] or 
+		if ( "sensors" not in state or
+      		"photoFront" not in state["sensors"] or
 			"lum" not in state["sensors"]["photoFront"] ):
 			return 0
 		return state["sensors"]["photoFront"]["lum"]
@@ -774,8 +774,8 @@ class OvaClientHttpV1(OvaClientHttp):
 		return super().getFrontLuminosityLevel(lum)
 	def getBackLuminosity(self) -> int :
 		state = self.getRobotState()
-		if ( "sensors" not in state or 
-      		"photoBack" not in state["sensors"] or 
+		if ( "sensors" not in state or
+      		"photoBack" not in state["sensors"] or
 			"lum" not in state["sensors"]["photoBack"] ):
 			return 0
 		return state["sensors"]["photoBack"]["lum"]
@@ -841,14 +841,14 @@ class OvaClientMqtt(IRobot):
 	def __init__(self,robotId:str or None=None, arena:str or None=None, username:str or None=None, password:str or None=None, server:str or None=None, port:int=1883, imgOutputPath:str or None="img.jpeg", autoconnect:bool=True, useProxy:bool=True, verbosity:int=3, clientId:str or None=None, welcomePrint=True):
 		"""
 		Build a mqtt client to communicate with an ova robot through a mqtt broker
-		
-		To join a public arena using mqtt.jusdeliens.com as server/broker, 
+
+		To join a public arena using mqtt.jusdeliens.com as server/broker,
 		note that only read operations on robot will be allowed by default.
 		To be granted write authorization on a robot in an arena, an arena admin
-		must allow it. More informations on https://play.jusdeliens.com 
+		must allow it. More informations on https://play.jusdeliens.com
 
-		In order to read/write from/to your robot as you wish, 
-		you may  
+		In order to read/write from/to your robot as you wish,
+		you may
 		- deploy your own mqtt broker on your own machine (mosquitto for instance)
 		- or use OvaClientHttp according to your ovaOS version
 		- or connect to the access point of your robot and enter this url in a chrome webbrowser
@@ -856,7 +856,7 @@ class OvaClientMqtt(IRobot):
 
 		Once connected, the camera stream is automatically enabled
 		You can disable it using enableCamera(False) to reduce bandwidth consumption
-		
+
 		### Arguments
 		* `robotId` - The unique name of the robot to control (e.g. ovaxxxxxxxxxxxx) as str
 		* `clientId` - The name of the ovamqttclient used for logging in the broker. Leave None will use a random one
@@ -887,20 +887,20 @@ class OvaClientMqtt(IRobot):
 		if ( password == None ):
 			password=input("🔑 password: ")
 		self.__startTime = datetime.now()
-		
+
 		userLogin=""
-		try: userLogin=str(os.getlogin()) 
+		try: userLogin=str(os.getlogin())
 		except: ...
 		macAddr=""
-		try: macAddr=str(hex(uuid.getnode())) 
+		try: macAddr=str(hex(uuid.getnode()))
 		except: ...
 
 		if ( clientId == None ):
 			clientId = "OvaClientMqtt-"+robotId+"-"+userLogin+"-"+macAddr+"-"+str(random.randint(0,99999))
 
 		self.__id : str = clientId
-		self.__arena : str = arena 
-		self.__idRobot : str = robotId 
+		self.__arena : str = arena
+		self.__idRobot : str = robotId
 		self.__isConnectedToRobot : bool = False
 		self.__isConnectedToArena : bool = False
 		self.__reqArena = {}
@@ -978,9 +978,9 @@ class OvaClientMqtt(IRobot):
 		if self.__isConnectedToBroker:
 			anx.info("⏳ Disconnecting "+str(self.__id)+" from broker...")
 			self.__client.disconnect()
-		if self.__isLoopStarted: 
+		if self.__isLoopStarted:
 			anx.info("⏳ Stopping mqtt thread loop ...")
-			self.__isLoopStarted = False	
+			self.__isLoopStarted = False
 			if ( self.__useClientThreadLoop ):
 				self.__client.loop_stop()
 				anx.info("🔴 Stopped mqtt thread loop")
@@ -1027,7 +1027,7 @@ class OvaClientMqtt(IRobot):
 
 		if (enableSleep):
 			time.sleep(DefaultClientSettings.dtSleepUpdate/1000)
-		
+
 		# Rx states and stream
 		if ( self.__rxFromRobot ):
 			self.__rxFromRobot = False
@@ -1035,7 +1035,7 @@ class OvaClientMqtt(IRobot):
 			if ( self.__isConnectedToRobot == False ):
 				self.__isConnectedToRobot = True
 				self.__events.onRobotConnected()
-			# Swap buf img and sensor states 
+			# Swap buf img and sensor states
 			if ( self.__cameraReader.update() > 0 ):
 				self.__events.onImageReceived(self.__cameraReader.getImage())
 			try:
@@ -1129,7 +1129,7 @@ class OvaClientMqtt(IRobot):
 		return self.__playerState
 	def getArenaState(self) -> dict[str,Any] :
 		return self.__arenaState
-	
+
 	def enableCamera(self, enable:bool):
 		self.__cameraEnabled = enable
 	def stop(self):
@@ -1164,11 +1164,11 @@ class OvaClientMqtt(IRobot):
 			return False
 	def print(self) -> None:
 		self.__printer.print()
-		
+
 	def __changeRobot(self, robotId, autoconnect):
 		anx.info("⏳ Connecting to robot "+str(robotId)+" ...")
 		self.disconnect()
-		self.__idRobot : str = robotId 
+		self.__idRobot : str = robotId
 		self.__prevRxFromRobot: int = datetime.fromtimestamp(0)
 		self.__topicImgStream : str  = "optx/clients/stream/"+self.__idRobot
 		self.__topicRobotState : str  = "robotx/clients/state/"+self.__idRobot
@@ -1293,7 +1293,7 @@ class OvaClientMqtt(IRobot):
 		anx.info("🔔 Subscribed "+userdata.__id+" to topic "+str(mid))
 	def __onUnsubscribe(client, userdata, mid):
 		"""Called after unsuscribed from mqtt topic"""
-		anx.info("🔔 Unsubscribed "+userdata.__id+" from topic "+str(mid))	
+		anx.info("🔔 Unsubscribed "+userdata.__id+" from topic "+str(mid))
 
 class OvaDebugClientMqtt(OvaClientMqtt):
 	def __init__(self,id:str or None=None, arena:str or None=None, username:str or None=None, password:str or None=None, server:str or None=None, port:int=1883, imgOutputPath:str or None="img.jpeg", autoconnect:bool=True, useProxy:bool=True, verbosity:int=3):
