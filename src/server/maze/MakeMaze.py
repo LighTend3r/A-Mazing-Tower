@@ -7,9 +7,10 @@ import sys
 sys.setrecursionlimit(1_000_000)
 
 class MakeMaze:
-    def __init__(self, wall: int | str = 1, floor: int | str = 0, debug:int = 0):
+    def __init__(self, wall: int | str = 1, floor: int | str = 0, coin: int | str = 2, debug:int = 0):
         self.__wall = wall
         self.__floor = floor
+        self.__coin = coin
         self.__debug = debug
 
     def setFloor(self, floor: int | str):
@@ -22,6 +23,12 @@ class MakeMaze:
         """Modifie l'objet qui représente un mur
         """
         self.__wall = wall
+
+    def setCoin(self, coin: int | str):
+        """Modifie l'objet qui représente un coin
+        """
+        self.__coin = coin
+
 
     def makeMultiMaze(self, row:int = 1, column:int = 1, taille_row:int = 10, taille_column:int = 10, p: int = 0) -> MultiMaze:
         """Créé un labyrinthe avec des labyrinthes plus petit
@@ -63,6 +70,19 @@ class MakeMaze:
 
 
         return multiMaze
+
+    def set_random_coin(self, maze: Maze, nb_coin: int, plan:List[List[int]]=[[-1, -1,], [-1, -1]]):
+        start_x = 0 if plan[0][0] == -1 else plan[0][0]
+        start_y = 0 if plan[0][1] == -1 else plan[0][1]
+        end_x = maze.get_row()-1 if plan[1][0] == -1 else plan[1][0]
+        end_y = maze.get_column()-1 if plan[1][1] == -1 else plan[1][1]
+
+        while nb_coin > 0:
+            x = random.randint(start_x, end_x-1)
+            y = random.randint(start_y, end_y-1)
+            if maze.get_grid()[x][y] == self.__floor:
+                maze.get_grid()[x][y] = self.__coin
+                nb_coin -= 1
 
     def __deleteWall(self, maze: Maze, nb_wall_delete:int, plan:List[List[int]]=[[-1, -1,], [-1, -1]]):
         start_x = 0 if plan[0][0] == -1 else plan[0][0]

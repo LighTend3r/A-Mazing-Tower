@@ -2,12 +2,13 @@ import maze.Maze as Maze
 from typing import List
 
 class MultiMaze:
-    def __init__(self, row:int, column:int, wall, floor):
-        self.__column = column
-        self.__row = row
+    def __init__(self, row:int, column:int, wall: int | str, floor: int | str, coin: int | str):
+        self.__column: int = column
+        self.__row: int = row
         self.__grid: List[List[Maze.Maze]] = [[None for _ in range(column)] for _ in range(row)]
-        self.__wall = wall
-        self.__floor = floor
+        self.__wall: int | str = wall
+        self.__floor: int | str = floor
+        self.__coin: int | str = coin
 
     def get_column(self) -> int:
         """Récupère le nombre de colonne
@@ -24,12 +25,12 @@ class MultiMaze:
         """
         return self.__grid
 
-    def get_wall(self):
+    def get_wall(self) -> int | str:
         """Récupére l'objet qui représente un mur
         """
         return self.__wall
 
-    def get_floor(self):
+    def get_floor(self) -> int | str:
         """Récupére l'objet qui représente le sol
         """
         return self.__floor
