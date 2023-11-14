@@ -4,32 +4,37 @@ from typing import List
 import random
 import sys
 
-sys.setrecursionlimit(1000000)
+sys.setrecursionlimit(1_000_000)
 
 class MakeMaze:
-    def __init__(self, wall = 1, floor = 0, debug:int = 0):
+    def __init__(self, wall: int | str = 1, floor: int | str = 0, debug:int = 0):
         self.__wall = wall
         self.__floor = floor
         self.__debug = debug
 
-    def setFloor(self, floor):
+    def setFloor(self, floor: int | str):
+        """Modifie l'objet qui représente le sol
+        """
+
         self.__floor = floor
 
-    def setWall(self, wall):
+    def setWall(self, wall: int | str):
+        """Modifie l'objet qui représente un mur
+        """
         self.__wall = wall
 
-    def makeMultiMaze(self, taille_row:int = 10, taille_column:int = 10, row:int = 1, column:int = 1, p: int = 0) -> MultiMaze:
+    def makeMultiMaze(self, row:int = 1, column:int = 1, taille_row:int = 10, taille_column:int = 10, p: int = 0) -> MultiMaze:
         """Créé un labyrinthe avec des labyrinthes plus petit
 
         Args:
-            taille_row (int, optional): La taille des lignes de chaque petit labyrinthe. Defaults to 10.
-            taille_column (int, optional): La taille des colonnes de chaque petit labyrinthe. Defaults to 10.
             row (int, optional): Nombre de labyrinthe en ligne. Defaults to 1.
             column (int, optional): Nombre de labyrinthe en colonne. Defaults to 1.
+            taille_row (int, optional): La taille des lignes de chaque petit labyrinthe. Defaults to 10.
+            taille_column (int, optional): La taille des colonnes de chaque petit labyrinthe. Defaults to 10.
             p (int, optional): Probabilité de supprimer des murs dans le labyrinthe. Defaults to 0.
 
         Returns:
-            Maze: _description_
+            MultiMaze: Retourne un labyrinthe avec des labyrinthes plus petit
         """
 
         assert p >= 0 and p <= 100, "p doit être compris entre 0 et 100 (c'est une probabilité)"

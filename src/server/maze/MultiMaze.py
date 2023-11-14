@@ -9,34 +9,54 @@ class MultiMaze:
         self.__wall = wall
         self.__floor = floor
 
-    def get_column(self):
+    def get_column(self) -> int:
+        """Récupère le nombre de colonne
+        """
         return self.__column
 
-    def get_row(self):
+    def get_row(self) -> int:
+        """Récupère le nombre de ligne
+        """
         return self.__row
 
-    def get_grid(self):
+    def get_grid(self)->List[List[Maze.Maze]]:
+        """Récupère la grille de labyrinthe
+        """
         return self.__grid
 
     def get_wall(self):
+        """Récupére l'objet qui représente un mur
+        """
         return self.__wall
 
     def get_floor(self):
+        """Récupére l'objet qui représente le sol
+        """
         return self.__floor
 
-    def set_grid(self, grid):
+    def set_grid(self, grid: List[List[Maze.Maze]]) -> None:
+        """Modifie la grille de labyrinthe
+        """
         self.__grid = grid
 
-    def get_maze(self, x:int, y:int):
+    def get_maze(self, x:int, y:int) -> Maze.Maze:
+        """Récupère un labyrinthe en position x,y
+        """
         return self.__grid[x][y]
 
-    def get_all_row(self):
+    def get_all_row(self) -> int:
+        """Récupère le nombre de ligne de la grille de labyrinthe complèter par les sous-labyrinthes
+        """
         return self.get_maze(0,0).get_row() * self.get_row() + 2 + self.get_row()-1
 
-    def get_all_column(self):
+    def get_all_column(self) -> int:
+        """Récupère le nombre de colonne de la grille de labyrinthe complèter par les sous-labyrinthes
+        """
         return self.get_maze(0,0).get_column() * self.get_column() + 2 + self.get_column()-1
 
-    def get_all_maze(self):
+    def get_all_maze(self) -> List[List[int]]:
+        """Récupère la grille de labyrinthe complèter par les sous-labyrinthes
+        """
         taille_petit_maze_x = self.get_maze(0,0).get_row()
         taille_petit_maze_y = self.get_maze(0,0).get_column()
 
@@ -60,4 +80,9 @@ class MultiMaze:
         return big_grid
 
     def __str__(self):
-        pass
+        msg = ""
+        for i in self.get_all_maze():
+            for j in i:
+                msg += str(j)
+            msg += "\n"
+        return msg

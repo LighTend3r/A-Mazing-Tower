@@ -27,15 +27,11 @@ agent = pytactx.Agent(playerId=PLAYERID,
                         server=SERVEUR,
                         verbosity=2)
 
-
-
-
-
-map = agent.map
+# map = agent.map
 
 makeMaze = MakeMaze.MakeMaze()
 makeMaze.setFloor(2)
-maze:MultiMaze.MultiMaze = makeMaze.makeMultiMaze(22,22,2,2,p=10)
+maze:MultiMaze.MultiMaze = makeMaze.makeMultiMaze(2,2,22,22,p=10)
 
 agent.ruleArena("gridColumns", maze.get_all_column())
 agent.ruleArena("gridRows", maze.get_all_row())
