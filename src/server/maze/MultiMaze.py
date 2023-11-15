@@ -2,6 +2,13 @@ import maze.Maze as Maze
 from typing import List
 
 class MultiMaze:
+    _instance = None
+
+    def __new__(cls, row:int, column:int, wall: int | str, floor: int | str, coin: int | str): # Singleton
+        if not cls._instance:
+            cls._instance = super(MultiMaze, cls).__new__(cls)
+        return cls._instance
+
     def __init__(self, row:int, column:int, wall: int | str, floor: int | str, coin: int | str):
         self.__column: int = column
         self.__row: int = row
@@ -9,7 +16,7 @@ class MultiMaze:
         self.__wall: int | str = wall
         self.__floor: int | str = floor
         self.__coin: int | str = coin
-        self.__nbPortal = 0
+        self.__nbPortal: int = 0
 
     def get_column(self) -> int:
         """Récupère le nombre de colonne
@@ -36,6 +43,11 @@ class MultiMaze:
         """
         return self.__floor
 
+    def get_coin(self) -> int | str:
+        """Récupére l'objet qui représente un coin
+        """
+        return self.__coin
+
     def set_grid(self, grid: List[List[Maze.Maze]]) -> None:
         """Modifie la grille de labyrinthe
         """
@@ -61,6 +73,14 @@ class MultiMaze:
 
         return "P" + str(self.__nbPortal)
 
+    def get_all_portal_name(self) -> List[str|int]:
+        """Récupère tout les noms de portail
+        """
+        if type(self.__wall) == int:
+            return [i for i in range(max(self.__wall, self.__floor, self.__coin) + self.__nbPortal)]
+        return ["P" + str(i) for i in range(self.__nbPortal)]
+
+
     def get_all_row(self) -> int:
         """Récupère le nombre de ligne de la grille de labyrinthe complèter par les sous-labyrinthes
         """
@@ -71,14 +91,19 @@ class MultiMaze:
         """
         return self.get_maze(0,0).get_column() * self.get_column() + 2 + self.get_column()-1
 
+    def get_tile(self, x:int , y:int) -> int | str:
+        """Récupère la tuile en position x,y
+        """
+        return self.get_all_maze()[x][y]
+
     def get_all_maze(self) -> List[List[int]]:
         """Récupère la grille de labyrinthe complèter par les sous-labyrinthes
         """
-        taille_petit_maze_x = self.get_maze(0,0).get_row()
-        taille_petit_maze_y = self.get_maze(0,0).get_column()
+        taille_petit_maze_x:int = self.get_maze(0,0).get_row()
+        taille_petit_maze_y:int = self.get_maze(0,0).get_column()
 
-        big_x = taille_petit_maze_x * self.get_row() + 2 + self.get_row()-1
-        big_y = taille_petit_maze_y * self.get_column() + 2 + self.get_column()-1
+        big_x:int = taille_petit_maze_x * self.get_row() + 2 + self.get_row()-1
+        big_y:int = taille_petit_maze_y * self.get_column() + 2 + self.get_column()-1
         big_grid = [[None for _ in range(big_y)] for _ in range(big_x)]
 
         for i in range(1,big_x, taille_petit_maze_x+1):

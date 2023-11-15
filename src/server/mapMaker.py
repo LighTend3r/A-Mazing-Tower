@@ -10,6 +10,7 @@ import maze.MultiMaze as MultiMaze
 
 
 
+### CONFIGURATION ###
 
 PLAYERID = config('PLAYER_ID_PYTACTX')
 ARENA = config('ARENA_PYTACTX')
@@ -28,17 +29,16 @@ PROBA = 10
 
 assert(len(MAP_IMGS) == len(MAP_FRICTION)), "MAP_IMGS and MAP_FRICTION must have the same length"
 
-print(ARENA, USERNAME, PASS, SERVEUR)
 
-
-agent = pytactx.Agent(playerId=PLAYERID,
+agent:pytactx.Agent = pytactx.Agent(playerId=PLAYERID,
                         arena=ARENA,
                         username=PASS,
                         password=PASS,
                         server=SERVEUR,
                         verbosity=2)
 
-# map = agent.map
+
+### CREATION DE LA MAP ###
 
 makeMaze = MakeMaze.MakeMaze()
 
@@ -46,15 +46,17 @@ makeMaze.setWall(1)
 makeMaze.setFloor(0)
 makeMaze.setCoin(2)
 
-maze:MultiMaze.MultiMaze = makeMaze.makeMultiMaze(ROW,COLONE,TAILLE_ROW,TAILLE_COLONE,p=PROBA)
-makeMaze.set_random_coin(maze, 5)
+multiMaze:MultiMaze.MultiMaze = makeMaze.makeMultiMaze(ROW,COLONE,TAILLE_ROW,TAILLE_COLONE,p=PROBA)
+makeMaze.set_random_coin(multiMaze, 5)
 
-agent.ruleArena("gridColumns", maze.get_all_column())
-agent.ruleArena("gridRows", maze.get_all_row())
+### MISE EN PLACE DES REGLES ###
+
+agent.ruleArena("gridColumns", multiMaze.get_all_column())
+agent.ruleArena("gridRows", multiMaze.get_all_row())
 
 agent.ruleArena("bgImg", "grass.jpg")
 
-agent.ruleArena("map", maze.get_all_maze())
+agent.ruleArena("map", multiMaze.get_all_maze())
 agent.ruleArena("mapImgs", MAP_IMGS)
 agent.ruleArena("mapFriction", MAP_FRICTION)
 
@@ -63,6 +65,7 @@ agent.ruleArena("pIcons", [''])
 agent.ruleArena("weapons", ['none'])
 agent.ruleArena("hitCollision", [0])
 agent.ruleArena("collision", [False])
+agent.ruleArena("range", 0) # Permet de voir tout les joueurs
 
 
 agent.ruleArena("teamNb", [False])
@@ -71,7 +74,34 @@ agent.ruleArena("api", "https://blog.lightender.fr/tkt/")
 agent.ruleArena("help", "https://blog.lightender.fr/tkt/")
 
 
-
+### LANCEMENT DU SERVEUR ###
 
 time.sleep(5)
 agent.update()
+
+
+# TODO: Faire un patron état sur la partie
+
+for agentId in agent.voisins.keys():
+    print(agentId)
+
+def get_tile(agentID, agent:pytactx.Agent, multiMaze: MultiMaze.MultiMaze):
+    x = agent.voisins[agentID].get_x()
+    y = agent.voisins[agentID].get_y()
+
+
+    return multiMaze.get_tile(x,y)
+
+
+while True:
+    for agentId in agent.voisins.keys():
+        if get_tile(agentId, agent, multiMaze) == multiMaze.get_coin():
+            agent.sendMsg(agentId, "Tu as gagné !")
+            agent.stop()
+            break
+        elif get_tile(agentId, agent, multiMaze) in multiMaze.get_all_portal_name():
+            agent.sendMsg(agentId, "Tu as perdu !")
+            agent.stop()
+            break
+    agent.update()
+    
