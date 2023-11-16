@@ -4,9 +4,7 @@ from decouple import config
 import time
 
 
-import maze.Maze as Maze
-import maze.MakeMaze as MakeMaze
-import maze.MultiMaze as MultiMaze
+from maze import *
 
 from utils import *
 
