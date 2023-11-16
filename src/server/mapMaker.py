@@ -62,18 +62,21 @@ agent.ruleArena("map", multiMaze.get_all_maze())
 agent.ruleArena("mapImgs", MAP_IMGS)
 agent.ruleArena("mapFriction", MAP_FRICTION)
 
-agent.ruleArena("profiles", ['runner'])
-agent.ruleArena("pIcons", [''])
-agent.ruleArena("weapons", ['none'])
-agent.ruleArena("hitCollision", [0])
-agent.ruleArena("collision", [False])
-agent.ruleArena("range", 0) # Permet de voir tout les joueurs
+agent.ruleArena("profiles", ['runner', 'arbitre', 'test'])
+agent.ruleArena("pIcons", ['', '', ''])
+agent.ruleArena("weapons", ['none','none','none'])
+agent.ruleArena("hitCollision", [0,0,0])
+agent.ruleArena("collision", [False, False, False])
+agent.ruleArena("range", [0,0,0]) # Permet de voir tout les joueurs
+
+agent.ruleArena("spawnArea", {"x": [0,0,0], "y": [0,0,0], "r": [0,0,0]})
 
 
-agent.ruleArena("teamNb", [False])
+agent.ruleArena("teamNb", [False, False, False])
 
 agent.ruleArena("api", "https://blog.lightender.fr/tkt/")
 agent.ruleArena("help", "https://blog.lightender.fr/tkt/")
+
 
 
 ### LANCEMENT DU SERVEUR ###
@@ -83,22 +86,25 @@ agent.update()
 
 
 # TODO: Faire un patron état sur la partie (peut être)
-
-for agentId in agent.voisins.keys():
+print(agent.range)
+for agentId in agent.players:
     print(agentId)
+    # agent.info
+    # agent.changerJoueur(agentId, "x", 1)
+    # agent.changerJoueur(agentId, "y", 1)
 
 
-while True:
-    for agentId in agent.voisins.keys():
-        if get_tile(agentId, agent, multiMaze) == multiMaze.get_coin(): # Si le joueur est sur une pièce
-            # agent.changerJoueur(agentId,)
-            x, y = get_coordonnee(agentId, agent)
-            multiMaze.set_tile(x,y, multiMaze.get_floor())
+# while True:
+#     for agentId in agent.players:
+#         if get_tile(agentId, agent, multiMaze) == multiMaze.get_coin(): # Si le joueur est sur une pièce
+#             # agent.changerJoueur(agentId,)
+#             x, y = get_coordonnee(agentId, agent)
+#             multiMaze.set_tile(x,y, multiMaze.get_floor())
 
-        elif get_tile(agentId, agent, multiMaze) in multiMaze.get_all_portal_name(): # Si le joueur est sur un portail
-            x, y = get_coordonnee(agentId, agent)
-            next_x, next_y = multiMaze.get_other_portal(x,y)
-            agent.changerJoueur(agentId, "x", next_x)
-            agent.changerJoueur(agentId, "y", next_y)
-    agent.update()
+#         elif get_tile(agentId, agent, multiMaze) in multiMaze.get_all_portal_name(): # Si le joueur est sur un portail
+#             x, y = get_coordonnee(agentId, agent)
+#             next_x, next_y = multiMaze.get_other_portal(x,y)
+#             agent.changerJoueur(agentId, "x", next_x)
+#             agent.changerJoueur(agentId, "y", next_y)
+#     agent.update()
 
