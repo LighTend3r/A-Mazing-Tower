@@ -92,9 +92,39 @@ class MultiMaze:
         return self.get_maze(0,0).get_column() * self.get_column() + 2 + self.get_column()-1
 
     def get_tile(self, x:int , y:int) -> int | str:
+        # TODO: On pourrait accélérer la recherche en utilisant la position du labyrinthe
         """Récupère la tuile en position x,y
         """
         return self.get_all_maze()[x][y]
+
+    def set_tile(self, x:int , y:int, tile:int | str) -> None:
+        """Modifie la tuile en position x,y
+        """
+        x = x - 1
+        y = y - 1
+
+        grid_x = int(x / (self.get_maze(0,0).get_row()+1))
+        grid_y = int(y / (self.get_maze(0,0).get_column()+1))
+        print(grid_x, grid_y)
+
+        self.__grid[grid_x][grid_y].set_tile(x % (self.get_maze(0,0).get_row()+1), y % (self.get_maze(0,0).get_column()+1), tile)
+
+    def get_other_portal(self, x:int, y:int) -> int | str:
+        """Récupère le numéro de l'autre portail
+        """
+        portal_name = self.get_tile(x,y)
+        if portal_name in self.get_all_portal_name():
+            return self.__find_other_portal(x,y,portal_name)
+        return None
+
+    def __find_other_portal(self, x:int, y:int, portal_name:int | str) -> tuple[int, int]:
+        """Récupère la position de l'autre portail
+        """
+        for i in range(self.get_row()):
+            for j in range(self.get_column()):
+                if self.get_tile(i,j) == portal_name and (i,j) != (x,y):
+                    return i,j
+        return None
 
     def get_all_maze(self) -> List[List[int]]:
         """Récupère la grille de labyrinthe complèter par les sous-labyrinthes

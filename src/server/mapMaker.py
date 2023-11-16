@@ -8,6 +8,8 @@ import maze.Maze as Maze
 import maze.MakeMaze as MakeMaze
 import maze.MultiMaze as MultiMaze
 
+from utils import *
+
 
 
 ### CONFIGURATION ###
@@ -80,28 +82,23 @@ time.sleep(5)
 agent.update()
 
 
-# TODO: Faire un patron état sur la partie
+# TODO: Faire un patron état sur la partie (peut être)
 
 for agentId in agent.voisins.keys():
     print(agentId)
 
-def get_tile(agentID, agent:pytactx.Agent, multiMaze: MultiMaze.MultiMaze):
-    x = agent.voisins[agentID].get_x()
-    y = agent.voisins[agentID].get_y()
-
-
-    return multiMaze.get_tile(x,y)
-
 
 while True:
     for agentId in agent.voisins.keys():
-        if get_tile(agentId, agent, multiMaze) == multiMaze.get_coin():
-            agent.sendMsg(agentId, "Tu as gagné !")
-            agent.stop()
-            break
-        elif get_tile(agentId, agent, multiMaze) in multiMaze.get_all_portal_name():
-            agent.sendMsg(agentId, "Tu as perdu !")
-            agent.stop()
-            break
+        if get_tile(agentId, agent, multiMaze) == multiMaze.get_coin(): # Si le joueur est sur une pièce
+            # agent.changerJoueur(agentId,)
+            x, y = get_coordonnee(agentId, agent)
+            multiMaze.set_tile(x,y, multiMaze.get_floor())
+
+        elif get_tile(agentId, agent, multiMaze) in multiMaze.get_all_portal_name(): # Si le joueur est sur un portail
+            x, y = get_coordonnee(agentId, agent)
+            next_x, next_y = multiMaze.get_other_portal(x,y)
+            agent.changerJoueur(agentId, "x", next_x)
+            agent.changerJoueur(agentId, "y", next_y)
     agent.update()
-    
+

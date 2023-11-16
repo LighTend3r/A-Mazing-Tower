@@ -40,6 +40,11 @@ class Maze:
         """
         return self.__coin
 
+    def set_tile(self, x:int, y:int, tile:int) -> None:
+        """Modifie une case de la grille
+        """
+        self.__grid[x][y] = tile
+
     def __str__(self):
         msg = ""
         for i in self.get_grid():
