@@ -23,6 +23,7 @@ agent.update()
 
 while 1:
     direction = random.randint(0,3)
+    
     if direction == 0:
         agent.moveUp()
     elif direction == 1:

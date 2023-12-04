@@ -68,14 +68,14 @@ class IRunner:
     def takeCoin(self) -> bool:
         """
         Try to take a coin at the current position.
-        If the operation failed, return False.
+        If there is a coin return True, return False.
         """
         ...
 
     def takePortal(self) -> bool:
         """
         Try to take a portal at the current position.
-        If the operation failed, return False.
+        If there is a portal return True, return False.
         """
         ...
     

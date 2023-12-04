@@ -13,8 +13,16 @@ SERVEUR = config('SERVEUR_PYTACTX')
 
 
 WALL = 1
+COIN = 2
+
 HEIGHT_MAZE=22
 WIDTH_MAZE=22
+
+dir = {
+    "TAKE_COIN": 0,
+    "DEFAULT": 1,
+    "TAKE_PORTAL": 2
+}
 
 class PytactxRunner(IRunner):
     def __init__(self, playerId:str) -> None:
@@ -82,15 +90,18 @@ class PytactxRunner(IRunner):
         return True
 
     def takeCoin(self) -> bool:
-        """
-        Try to take a coin at the current position.
-        If the operation failed, return False.
-        """
-        ...
+        if(self.__agent.map[self.__agent.y, self.__agent.x] != COIN):
+            self.__agent.lookAt(dir['DEFAULT'])
+            return False
+        
+        self.__agent.lookAt(dir['TAKE_COIN'])
+        return True
+
 
     def takePortal(self) -> bool:
-        """
-        Try to take a portal at the current position.
-        If the operation failed, return False.
-        """
-        ...
+        if(self.__agent.map[self.__agent.y, self.__agent.x] <= COIN):
+            self.__agent.lookAt(dir['DEFAULT'])
+            return False
+        
+        self.__agent.lookAt(dir['TAKE_PORTAL'])
+        return True
