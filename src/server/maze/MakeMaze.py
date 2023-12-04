@@ -70,8 +70,16 @@ class MakeMaze:
         self.__set_minimum_portal(multiMaze)
         multiMaze.set_grid(grid)
 
-
         return multiMaze
+    def set_spawn(self, multiMaze: MultiMaze):
+        # set le spawn
+        x = random.randint(0, multiMaze.get_all_row()-1)
+        y = random.randint(0, multiMaze.get_all_column()-1)
+        maze_map = multiMaze.get_all_maze()
+        while maze_map[x][y] != self.__floor:
+            x = random.randint(0, multiMaze.get_all_row()-1)
+            y = random.randint(0, multiMaze.get_all_column()-1)
+        multiMaze.set_spawn(x,y)
 
     def set_random_coin(self, multiMaze: MultiMaze, nb_coin: int = 1, plan:List[List[int]]=[[-1, -1], [-1, -1]]):
         """Place des pièces aléatoirement dans le labyrinthe

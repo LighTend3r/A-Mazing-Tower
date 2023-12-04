@@ -17,6 +17,17 @@ class MultiMaze:
         self.__floor: int | str = floor
         self.__coin: int | str = coin
         self.__nbPortal: int = 0
+        self.__spawn: List[int] = [0,0]
+
+    def get_spawn(self) -> List[int]:
+        """Récupère la position du spawn
+        """
+        return self.__spawn
+
+    def set_spawn(self, x:int, y:int) -> None:
+        """Modifie la position du spawn
+        """
+        self.__spawn = [x,y]
 
     def get_column(self) -> int:
         """Récupère le nombre de colonne
@@ -77,7 +88,8 @@ class MultiMaze:
         """Récupère tout les noms de portail
         """
         if type(self.__wall) == int:
-            return [i for i in range(max(self.__wall, self.__floor, self.__coin) + self.__nbPortal)]
+            mini = max(self.__wall, self.__floor, self.__coin) +1
+            return [i for i in range(mini, mini + self.__nbPortal)]
         return ["P" + str(i) for i in range(self.__nbPortal)]
 
 
@@ -105,7 +117,6 @@ class MultiMaze:
 
         grid_x = int(x / (self.get_maze(0,0).get_row()+1))
         grid_y = int(y / (self.get_maze(0,0).get_column()+1))
-        print(grid_x, grid_y)
 
         self.__grid[grid_x][grid_y].set_tile(x % (self.get_maze(0,0).get_row()+1), y % (self.get_maze(0,0).get_column()+1), tile)
 
@@ -115,16 +126,16 @@ class MultiMaze:
         portal_name = self.get_tile(x,y)
         if portal_name in self.get_all_portal_name():
             return self.__find_other_portal(x,y,portal_name)
-        return None
+        return None, None
 
     def __find_other_portal(self, x:int, y:int, portal_name:int | str) -> tuple[int, int]:
         """Récupère la position de l'autre portail
         """
-        for i in range(self.get_row()):
-            for j in range(self.get_column()):
+        for i in range(self.get_all_row()):
+            for j in range(self.get_all_column()):
                 if self.get_tile(i,j) == portal_name and (i,j) != (x,y):
                     return i,j
-        return None
+        return None, None
 
     def get_all_maze(self) -> List[List[int]]:
         """Récupère la grille de labyrinthe complèter par les sous-labyrinthes

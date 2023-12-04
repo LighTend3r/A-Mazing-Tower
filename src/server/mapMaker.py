@@ -48,7 +48,7 @@ makeMaze.setCoin(2)
 
 multiMaze:MultiMaze.MultiMaze = makeMaze.makeMultiMaze(ROW,COLONE,TAILLE_ROW,TAILLE_COLONE,p=PROBA)
 makeMaze.set_random_coin(multiMaze, 5)
-
+makeMaze.set_spawn(multiMaze)
 ### MISE EN PLACE DES REGLES ###
 
 agent.ruleArena("gridColumns", multiMaze.get_all_column())
@@ -66,7 +66,7 @@ agent.ruleArena("hitCollision", [0,0,0])
 agent.ruleArena("collision", [False, False, False])
 agent.ruleArena("range", [0,0,0]) # Permet de voir tout les joueurs
 
-agent.ruleArena("spawnArea", {"x": [0,0,0], "y": [0,0,0], "r": [0,0,0]})
+agent.ruleArena("spawnArea", {"x": [multiMaze.get_spawn()[0] for i in range(3)], "y": [multiMaze.get_spawn()[1] for i in range(3)], "r": [0,0,0]})
 
 
 agent.ruleArena("teamNb", [False, False, False])
@@ -83,24 +83,30 @@ agent.update()
 
 
 # TODO: Faire un patron état sur la partie (peut être)
-print(agent.range)
-for agentId in agent.players:
-    print(agentId)
-    # agent.changerJoueur(agentId, "x", 1)
-    # agent.changerJoueur(agentId, "y", 1)
-
+spawn = multiMaze.get_spawn()
+for agentId in agent.range.keys():
+    agent.rulePlayer(agentId, "x", spawn[0])
+    agent.rulePlayer(agentId, "y", spawn[1])
+time.sleep(2)
+agent.update()
+print(multiMaze.get_all_portal_name())
 
 while True:
-    for agentId in agent.players:
+    for agentId in agent.range.keys():
         if get_tile(agentId, agent, multiMaze) == multiMaze.get_coin(): # Si le joueur est sur une pièce
-            # agent.changerJoueur(agentId,)
+            print(agentId, ": Coin")
             x, y = get_coordonnee(agentId, agent)
             multiMaze.set_tile(x,y, multiMaze.get_floor())
 
+
+
         elif get_tile(agentId, agent, multiMaze) in multiMaze.get_all_portal_name(): # Si le joueur est sur un portail
+            print(agentId, ": Portal")
             x, y = get_coordonnee(agentId, agent)
             next_x, next_y = multiMaze.get_other_portal(x,y)
-            # agent.changerJoueur(agentId, "x", next_x)
-            # agent.changerJoueur(agentId, "y", next_y)
+            print(next_x, next_y)
+            agent.rulePlayer(agentId, "x", next_y)
+            agent.rulePlayer(agentId, "y", next_x)
+    agent.ruleArena("map", multiMaze.get_all_maze())
     agent.update()
 
