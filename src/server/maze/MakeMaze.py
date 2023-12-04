@@ -84,6 +84,7 @@ class MakeMaze:
     def set_random_coin(self, multiMaze: MultiMaze, nb_coin: int = 1, plan:List[List[int]]=[[-1, -1], [-1, -1]]):
         """Place des pièces aléatoirement dans le labyrinthe
         """
+        multiMaze.set_nbCoin(multiMaze.get_nbCoin() + nb_coin)
         while nb_coin > 0:
             x = random.randint(0, multiMaze.get_row()-1)
             y = random.randint(0, multiMaze.get_column()-1)

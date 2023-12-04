@@ -18,6 +18,7 @@ class MultiMaze:
         self.__coin: int | str = coin
         self.__nbPortal: int = 0
         self.__spawn: List[int] = [0,0]
+        self.__nbCoin = 0
 
     def get_spawn(self) -> List[int]:
         """Récupère la position du spawn
@@ -58,6 +59,16 @@ class MultiMaze:
         """Récupére l'objet qui représente un coin
         """
         return self.__coin
+
+    def get_nbCoin(self) -> int:
+        """Récupére le nombre de coin
+        """
+        return self.__nbCoin
+
+    def set_nbCoin(self, nbCoin:int) -> None:
+        """Modifie le nombre de coin
+        """
+        self.__nbCoin = nbCoin
 
     def set_grid(self, grid: List[List[Maze.Maze]]) -> None:
         """Modifie la grille de labyrinthe
