@@ -91,22 +91,30 @@ time.sleep(2)
 agent.update()
 print(multiMaze.get_all_portal_name())
 
+
+cooldown_portal = { i:time.time() for i in multiMaze.get_all_portal_name() }
+
 while True:
     for agentId in agent.range.keys():
-        if get_tile(agentId, agent, multiMaze) == multiMaze.get_coin(): # Si le joueur est sur une pièce
+        tile = get_tile(agentId, agent, multiMaze)
+        if tile == multiMaze.get_coin(): # Si le joueur est sur une pièce
             print(agentId, ": Coin")
             x, y = get_coordonnee(agentId, agent)
             multiMaze.set_tile(x,y, multiMaze.get_floor())
 
 
 
-        elif get_tile(agentId, agent, multiMaze) in multiMaze.get_all_portal_name(): # Si le joueur est sur un portail
-            print(agentId, ": Portal")
-            x, y = get_coordonnee(agentId, agent)
-            next_x, next_y = multiMaze.get_other_portal(x,y)
-            print(next_x, next_y)
-            agent.rulePlayer(agentId, "x", next_y)
-            agent.rulePlayer(agentId, "y", next_x)
+        elif tile in multiMaze.get_all_portal_name(): # Si le joueur est sur un portail
+            print(time.time() - cooldown_portal[tile])
+            if time.time() - cooldown_portal[tile] < 2:
+                print("Cooldown")
+            else:
+                cooldown_portal[tile] = time.time()
+                print(agentId, ": Portal")
+                x, y = get_coordonnee(agentId, agent)
+                next_x, next_y = multiMaze.get_other_portal(x,y)
+                agent.rulePlayer(agentId, "x", next_y)
+                agent.rulePlayer(agentId, "y", next_x)
     agent.ruleArena("map", multiMaze.get_all_maze())
     agent.update()
 
