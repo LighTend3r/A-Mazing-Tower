@@ -1,51 +1,57 @@
-# <img src="doc/A-Mazing-Tower-Logo.jpg" alt="drawing" width="40"/> A-Mazing-Tower
+# <img src="doc/A-Mazing-Tower-Logo.jpg" alt="logo" style="width: 40px"/> A-Mazing-Tower
 
 ## Description:
-Bienvenue dans "A Mazing Tower" ! Un jeu de labyrinthe passionnant où vous devez explorer quatre salles labyrinthiques et collecter des pièces pour atteindre la victoire.
+
+Bienvenue dans "A Mazing Tower" ! Un jeu de labyrinthe passionnant où vous devez explorer quatre salles labyrinthiques
+et collecter des pièces pour atteindre la victoire.
 
 ## 🎯 Contexte & Cahier des Charges
 
-Développé dans le cadre d'une formation pour permettre une monté en compétence en Python, ce jeu vise à apprendre les bonnes pratique de programmation de manière ludique.
+Développé dans le cadre d'une formation pour permettre une montée en compétence en Python, ce jeu vise à apprendre les
+bonnes pratiques de programmation de manière ludique.
 
 ### Backlog:
-|id|description|priorité|
-|:-:|---|:-:|
-|1|En tant qu'utilisateur, je peux voir la carte|1|
-|2|En tant qu'utilisateur, je peux voir mes points|1|
-|3|En tant qu'utilisateur, je peux me déplacer dans la salle où je suis|2|
-|4|En tant qu'utilisateur, je peux ramasser des pièces|2|
-|5|En tant qu'utilisateur, je peux me déplacer entre les salles avec un "téléporteur"|3|
-|6|En tant qu'utilisateur, je peux ramasser des bonus/malus|4|
 
-## 🎲 Règles du Jeu
+| id | description                                                                        | priorité |
+|:--:|------------------------------------------------------------------------------------|:--------:|
+| 1  | En tant qu'utilisateur, je peux voir la carte                                      |    1     |
+| 2  | En tant qu'utilisateur, je peux voir mes points                                    |    1     |
+| 3  | En tant qu'utilisateur, je peux me déplacer dans la salle où je suis               |    2     |
+| 4  | En tant qu'utilisateur, je peux ramasser des pièces                                |    2     |
+| 5  | En tant qu'utilisateur, je peux me déplacer entre les salles avec un "téléporteur" |    3     |
+| 6  | En tant qu'utilisateur, je peux ramasser des bonus/malus                           |    4     |
+
+## 🎲 Règles du jeu
 
 - **Maquette :**
 
-<img src="doc/Maquette.png" alt="drawing" width="500"/>
+<img src="doc/Maquette.png" alt="Maquette du jeu" style="width: 500px"/>
 
 - **Déroulé d'une partie :**
     - Les joueurs apparaissent dans un des 4 labyrinthes.
-    - Des pièces apparaissent aléatoirements dans les 4 labyrinthes.
+    - Des pièces apparaissent aléatoirement dans les 4 labyrinthes.
     - Les joueurs peuvent se déplacer dans les labyrinthes en utilisant des téléporteurs.
     - Dès qu'il n'y a plus de pièces, les labyrinthes sont réinitialisés.
 
-- **Conditions de Victoire :** Être le joueur ayant ramassé le plus de pièces. 
+- **Conditions de Victoire :** Être le joueur ayant ramassé le plus de pièces.
 
 ## 🎮 Use Cases
 
 ### Pour l'Administrateur
 
 Un administrateur peut/doit :
-- [Lister les actions que l'administrateur peut/doit effectuer pour lancer/administrer une arène de jeu avec des apprenants.]
+- Remplir le fichier [.env](.env) avec les paramètres de l'arène et de l'arbitre
+- Exécuter le fichier [mapMaker.py](src/server/mapMaker.py) comme décrit dans la section [Installation](#-installation)
 
 ### Pour le Joueur
 
-Pour les informations sur le joueur, veuillez vous référer au [README](/src/api/README.md) de l'API. 
+Pour les informations sur le joueur, veuillez vous référer au [README](/src/api/README.md) de l'API.
 
 ## 📞 Diagramme de Séquence
 
 [Expliquer le déroulé d'une partie à l'aide d'un diagramme de séquence. Décrire les principales étapes et comment les couches s'échangent des données.]
-Expliquer les points suivants:
+Expliquer les points suivants :
+
 - [ ] les acteurs
 - [ ] le déroulé d'une partie en partant des use case
 - [ ] les données échangées entre chaque couche
@@ -59,7 +65,6 @@ Expliquer les points suivants:
 
 - Python 3.12 ou plus 🐍
 - une arène dans Pytactx
-
 
 ### Pour les Apprenants
 
@@ -87,7 +92,7 @@ Et voila 👍
 ## 🛣️ Roadmap
 
 [Insérer la roadmap du projet, décrivant les fonctionnalités futures, les améliorations, etc.]
-Ce qui reste à faire priorisé dans le temps
+Ce qui reste à faire, priorisé dans le temps.
 
 ## 🧑‍💻 AuteurS
 
@@ -98,7 +103,7 @@ Ce qui reste à faire priorisé dans le temps
 
 - L'équipe ***Jusdeliens*** 🔥🔥🔥
 
-
 ## ⚖️ Licence
 
-Ce projet est sous licence [MIT License](https://opensource.org/license/mit/). Consultez le fichier [`LICENSE.md`](LICENSE.md) pour plus d'informations.
+Ce projet est sous licence [MIT License](https://opensource.org/license/mit/). Consultez le
+fichier [`LICENSE.md`](LICENSE.md) pour plus d'informations.
