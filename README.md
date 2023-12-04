@@ -25,11 +25,11 @@ Développé dans le cadre d'une formation pour permettre une monté en compéten
 
 - **Déroulé d'une partie :**
     - Les joueurs apparaissent dans un des 4 labyrinthes.
-    - Des pièces apparaissent (nombre défini par l'admin) à une position aléatoire dans les 4 labyrinthes.
-    - Les joueurs peuvent se déplacer dans les labyrinthes.
-    - Dès qu'il n'y a plus de pièce, les labyrinthes sont réinitialisés.
+    - Des pièces apparaissent aléatoirements dans les 4 labyrinthes.
+    - Les joueurs peuvent se déplacer dans les labyrinthes en utilisant des téléporteurs.
+    - Dès qu'il n'y a plus de pièces, les labyrinthes sont réinitialisés.
 
-- **Conditions de Victoire :** Etre le joueur ayant ramassé le plus de pièce.
+- **Conditions de Victoire :** Être le joueur ayant ramassé le plus de pièces. 
 
 ## 🎮 Use Cases
 
@@ -41,10 +41,6 @@ Un administrateur peut/doit :
 ### Pour le Joueur
 
 Pour les informations sur le joueur, veuillez vous référer au [README](/src/api/README.md) de l'API. 
-
-## 🖧 Architecture Matériel (Optionnel)
-
-[Insérer un schéma overview présentant les machines et protocoles utilisés (serveurs, clients, broker) avec un texte expliquant le choix des technologies.]
 
 ## 📞 Diagramme de Séquence
 
@@ -61,8 +57,9 @@ Expliquer les points suivants:
 
 ### Pour l'Administrateur
 
-- [Liste du matériel requis.]
-- [Liste du logiciel requis.]
+- Python 3.12 ou plus 🐍
+- une arène dans Pytactx
+
 
 ### Pour les Apprenants
 
@@ -70,7 +67,12 @@ Pour les prérequis des apprenants, veuillez vous référer au [README](/src/api
 
 ## ⚙️ Installation
 
-Step by step : commandes à executer par l'administrateur, paquets à installer ...
+- `pip install paho-mqtt pillow requests`
+- `git clone https://github.com/LighTend3r/A-Mazing-Tower.git`
+- `cd scr/server`
+- `python mapMaker.py`
+
+Et voila 👍
 
 ## 🧪 Tests
 
@@ -80,23 +82,23 @@ Step by step : commandes à executer par l'administrateur, paquets à installer 
 
 ### Étapes pour Lancer les Tests
 
+[ALED]
 
 ## 🛣️ Roadmap
 
 [Insérer la roadmap du projet, décrivant les fonctionnalités futures, les améliorations, etc.]
 Ce qui reste à faire priorisé dans le temps
 
-## 🧑‍💻 Auteur
+## 🧑‍💻 AuteurS
 
 - Antoine CLERICE
 - Thomas FEDORAWIEZ
 - Léo HARNOIS
 - Pierre TOITOT
 
+- L'équipe ***Jusdeliens*** 🔥🔥🔥
+
+
 ## ⚖️ Licence
 
-Ce projet est sous licence [Insérer le type de licence]. Consultez le fichier `LICENSE.md` pour plus d'informations.
-
-S'appuyer sur https://choosealicense.com/ ou la doc de github
-Attention à vérifier la compatibilité de votre licence avec celles des modules utilisés
-
+Ce projet est sous licence [MIT License](https://opensource.org/license/mit/). Consultez le fichier [`LICENSE.md`](LICENSE.md) pour plus d'informations.
