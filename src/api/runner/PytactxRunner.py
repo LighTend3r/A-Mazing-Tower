@@ -4,24 +4,19 @@ import time
 import j2l.pytactx.agent as pytactx
 
 from decouple import config
-import IRunner
+from runner.IRunner import IRunner
 
 ARENA = config('ARENA_PYTACTX')
 USERNAME = config('USERNAME_PYTACTX')
 PASS = config('PASS_PYTACTX')
 SERVEUR = config('SERVEUR_PYTACTX')
-PORT = config('PORT_PYTACTX')
 
-NB_VERTICAL = config('NB_VERTICAL_MAZE')
-NB_HORIZONTAL = config('NB_HORIZONTAL_MAZE')
-HEIGHT_MAZE = config('HEIGHT_MAZE')
-WIDTH_MAZE = config('WIDTH_MAZE')
 
 WALL = 1
 
 class PytactxRunner(IRunner):
     def __init__(self, playerId:str) -> None:
-        self.__agent = pytactx.Agent(playerId, ARENA, USERNAME, PASS, SERVEUR, PORT)
+        self.__agent = pytactx.Agent(playerId, ARENA, USERNAME, PASS, SERVEUR)
 
     def getGlobalCoordinates(self) -> tuple[int, int]:
         return (self.__agent.x, self.__agent.y)
@@ -53,34 +48,34 @@ class PytactxRunner(IRunner):
 
         if(y<=0 or self.getCurrentMazeMap[y-1][x] == WALL):
             return False
-        
+
         self.__agent.moveTowards(self.__agent.x, self.__agent.y - 1)
         return True
-    
+
     def moveDown(self) -> bool:
         x,y = self.getCurrentMazeCoordinates
 
         if(y>=(HEIGHT_MAZE - 1) or self.getCurrentMazeMap[y+1][x] == WALL):
             return False
-        
+
         self.__agent.moveTowards(self.__agent.x, self.__agent.y + 1)
         return True
-    
+
     def moveLeft(self) -> bool:
         x,y = self.getCurrentMazeCoordinates
 
         if(x <= 0 or self.getCurrentMazeMap[y][x-1] == WALL):
             return False
-        
+
         self.__agent.moveTowards(self.__agent.x - 1, self.__agent.y)
         return True
-    
+
     def moveRight(self) -> bool:
         x,y = self.getCurrentMazeCoordinates
 
         if(x>=(WIDTH_MAZE - 1) or self.getCurrentMazeMap[y][x+1] == WALL):
             return False
-        
+
         self.__agent.moveTowards(self.__agent.x + 1, self.__agent.y)
         return True
 

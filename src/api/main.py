@@ -1,7 +1,9 @@
+#! /usr/bin/env python3
 import j2l.pytactx.agent as pytactx
 import os
 import time
 from decouple import config
+from runner.PytactxRunner import PytactxRunner
 
 ARENA = config('ARENA_PYTACTX')
 PLAYER_ID = config('PLAYER_ID_PYTACTX_GUEST')
@@ -12,12 +14,7 @@ SERVEUR = config('SERVEUR_PYTACTX')
 print(ARENA, PLAYER_ID, USERNAME, PASS, SERVEUR)
 
 
-agent = pytactx.Agent(playerId=PLAYER_ID,
-                        arena=ARENA,
-                        username=PASS,
-                        password=PASS,
-                        server=SERVEUR,
-                        verbosity=2)
+agent = PytactxRunner(PLAYER_ID)
 
 time.sleep(5)
 

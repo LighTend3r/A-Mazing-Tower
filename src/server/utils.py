@@ -2,8 +2,9 @@ import j2l.pytactx.agent as pytactx
 import maze.MultiMaze as MultiMaze
 
 def get_coordonnee(agentID, agent:pytactx.Agent):
-    x = agent.players[agentID].get_x()
-    y = agent.players[agentID].get_y()
+    return 0,0
+    x = agent.range[agentID].get_x()
+    y = agent.range[agentID].get_y()
 
     return x,y
 

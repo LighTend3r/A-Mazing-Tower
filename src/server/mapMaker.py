@@ -55,7 +55,6 @@ agent.ruleArena("gridColumns", multiMaze.get_all_column())
 agent.ruleArena("gridRows", multiMaze.get_all_row())
 
 agent.ruleArena("bgImg", "grass.jpg")
-
 agent.ruleArena("map", multiMaze.get_all_maze())
 agent.ruleArena("mapImgs", MAP_IMGS)
 agent.ruleArena("mapFriction", MAP_FRICTION)
@@ -87,22 +86,21 @@ agent.update()
 print(agent.range)
 for agentId in agent.players:
     print(agentId)
-    # agent.info
     # agent.changerJoueur(agentId, "x", 1)
     # agent.changerJoueur(agentId, "y", 1)
 
 
-# while True:
-#     for agentId in agent.players:
-#         if get_tile(agentId, agent, multiMaze) == multiMaze.get_coin(): # Si le joueur est sur une pièce
-#             # agent.changerJoueur(agentId,)
-#             x, y = get_coordonnee(agentId, agent)
-#             multiMaze.set_tile(x,y, multiMaze.get_floor())
+while True:
+    for agentId in agent.players:
+        if get_tile(agentId, agent, multiMaze) == multiMaze.get_coin(): # Si le joueur est sur une pièce
+            # agent.changerJoueur(agentId,)
+            x, y = get_coordonnee(agentId, agent)
+            multiMaze.set_tile(x,y, multiMaze.get_floor())
 
-#         elif get_tile(agentId, agent, multiMaze) in multiMaze.get_all_portal_name(): # Si le joueur est sur un portail
-#             x, y = get_coordonnee(agentId, agent)
-#             next_x, next_y = multiMaze.get_other_portal(x,y)
-#             agent.changerJoueur(agentId, "x", next_x)
-#             agent.changerJoueur(agentId, "y", next_y)
-#     agent.update()
+        elif get_tile(agentId, agent, multiMaze) in multiMaze.get_all_portal_name(): # Si le joueur est sur un portail
+            x, y = get_coordonnee(agentId, agent)
+            next_x, next_y = multiMaze.get_other_portal(x,y)
+            # agent.changerJoueur(agentId, "x", next_x)
+            # agent.changerJoueur(agentId, "y", next_y)
+    agent.update()
 
