@@ -1,31 +1,23 @@
 class IRunner:
-    def getGlobalCoordinates(self) -> tuple[int, int]:
+    def getCoordinates(self) -> tuple[int, int]:
         """
-        Return the coordinates in the entire map x and y.
-        """
-        ...
-
-    def getCurrentMazeCoordinates(self) -> tuple[int, int]:
-        """
-        Return the coordinates in the entire map x and y.
+        Return the coordinates in the map, x and y.
         """
         ...
 
-    def getCurrentMaze(self) -> int:
+    def getMap(self) -> tuple[tuple[int]]:
         """
-        Return the current maze number.
-        """
-        ...
-
-    def getCurrentMazeMap(self) -> tuple[tuple[int]]:
-        """
-        Return the map of the current maze.
+        Return the map.
         """
         ...
 
-    def getGlobalMap(self) -> tuple[tuple[int]]:
+    def getCurrentTile(self) -> int:
         """
-        Return the entire map.
+        Return the current tile value
+        \n0 -> Path
+        \n1 -> Wall
+        \n2 -> Coin
+        \nAbove -> Portals
         """
         ...
 
