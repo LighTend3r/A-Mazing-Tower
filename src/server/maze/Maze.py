@@ -45,6 +45,11 @@ class Maze:
         """
         self.__grid[x][y] = tile
 
+    def get_tile(self, x:int, y:int) -> int:
+        """Récupère une case de la grille
+        """
+        return self.__grid[x][y]
+
     def __str__(self):
         msg = ""
         for i in self.get_grid():
