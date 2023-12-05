@@ -18,7 +18,7 @@ USERNAME = config('USERNAME_PYTACTX')
 PASS = config('PASS_PYTACTX')
 SERVEUR = config('SERVEUR_PYTACTX')
 
-MAP_IMGS = ["","ironblock.jpg", "tresor.png", "d0.png", "d1.png", "d2.png"]
+MAP_IMGS = ["","https://github.com/LighTend3r/A-Mazing-Tower/tree/main/doc/carre_noir.png", "tresor.png", "d0.png", "d1.png", "d2.png"]
 MAP_FRICTION = [0,1,0,0,0,0]
 
 ROW = 2
@@ -54,7 +54,7 @@ makeMaze.set_spawn(multiMaze)
 agent.ruleArena("gridColumns", multiMaze.get_all_column())
 agent.ruleArena("gridRows", multiMaze.get_all_row())
 
-agent.ruleArena("bgImg", "grass.jpg")
+agent.ruleArena("bgImg", "https://github.com/LighTend3r/A-Mazing-Tower/tree/main/doc/carre_blanc.png")
 
 agent.ruleArena("mapImgs", MAP_IMGS)
 agent.ruleArena("mapFriction", MAP_FRICTION)
