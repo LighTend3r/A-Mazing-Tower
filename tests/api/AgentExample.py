@@ -1,5 +1,4 @@
 import sys
-from copy import deepcopy
 
 sys.path.append("../../src/api")
 
@@ -34,21 +33,18 @@ class AgentExample:
         if map_already_seen[y][x]:
             return
 
-        actions.append(action)
-
         if maze_map[y][x] == Case.COIN.value:
-            actions.append("COIN")
             self.__closest_coin = (x, y)
-            self.__path = actions
+            self.__path = actions + [action, "COIN"]
             return
 
-        map_already_seen[y][x] = False
-        queue.append([(x, y), actions])
+        map_already_seen[y][x] = True
+        queue.append([(x, y), actions + [action]])
 
     def __search_closest_coin(self):
         self.__path = []
         maze_map = self.__agent.get_map()
-        map_already_seen = [[False] * len(maze_map[0]) for i in range(len(maze_map))]
+        map_already_seen = [[False] * len(maze_map[0]) for _ in range(len(maze_map))]
         portals = self.__get_portals()
 
         if self.__nb_coins == 0:
@@ -63,16 +59,16 @@ class AgentExample:
             (x, y), actions = queue.pop(0)
 
             if y - 1 >= 0 and maze_map[y - 1][x] != Case.WALL.value:
-                self.__add_to_queue(map_already_seen, maze_map, x, y - 1, queue, deepcopy(actions), "UP")
+                self.__add_to_queue(map_already_seen, maze_map, x, y - 1, queue, actions, "UP")
 
             if y + 1 < len(maze_map) and maze_map[y + 1][x] != Case.WALL.value:
-                self.__add_to_queue(map_already_seen, maze_map, x, y + 1, queue, deepcopy(actions), "DOWN")
+                self.__add_to_queue(map_already_seen, maze_map, x, y + 1, queue, actions, "DOWN")
 
             if x - 1 >= 0 and maze_map[y][x - 1] != Case.WALL.value:
-                self.__add_to_queue(map_already_seen, maze_map, x - 1, y, queue, deepcopy(actions), "LEFT")
+                self.__add_to_queue(map_already_seen, maze_map, x - 1, y, queue, actions, "LEFT")
 
             if x + 1 < len(maze_map[0]) and maze_map[y][x + 1] != Case.WALL.value:
-                self.__add_to_queue(map_already_seen, maze_map, x + 1, y, queue, deepcopy(actions), "RIGHT")
+                self.__add_to_queue(map_already_seen, maze_map, x + 1, y, queue, actions, "RIGHT")
 
             if maze_map[y][x] >= Case.PORTALS.value:
                 if (x, y) == portals[maze_map[y][x]][0]:
@@ -80,19 +76,16 @@ class AgentExample:
                 else:
                     new_x, new_y = portals[maze_map[y][x]][0]
 
-                self.__add_to_queue(map_already_seen, maze_map, new_x, new_y, queue, deepcopy(actions), "TP")
+                self.__add_to_queue(map_already_seen, maze_map, new_x, new_y, queue, actions, "TP")
 
             if (x, y) == last_pos_last_range:
                 range_search += 1
-                last_pos_last_range = queue[-1][0]
-                print(range_search)
-
-        print("find")
+                if len(queue) != 0:
+                    last_pos_last_range = queue[-1][0]
 
     def __turn(self):
         while (self.__closest_coin is None or
                self.__agent.get_map()[self.__closest_coin[1]][self.__closest_coin[0]] != Case.COIN.value):
-            print(self.__closest_coin)
             self.__search_closest_coin()
 
         next_action = self.__path.pop(0)
