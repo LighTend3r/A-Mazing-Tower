@@ -15,9 +15,6 @@ SERVEUR = config('SERVEUR_PYTACTX')
 WALL = 1
 COIN = 2
 
-HEIGHT_MAZE=22
-WIDTH_MAZE=22
-
 dir = {
     "TAKE_COIN": 0,
     "DEFAULT": 1,
@@ -53,7 +50,7 @@ class PytactxRunner(IRunner):
     def moveDown(self) -> bool:
         x,y = self.getCoordinates()
 
-        if(y>=(HEIGHT_MAZE - 1) or self.getMap()[y+1][x] == WALL):
+        if(y>=(self.__agent.gridRows - 1) or self.getMap()[y+1][x] == WALL):
             return False
 
         self.__agent.moveTowards(self.__agent.x, self.__agent.y + 1)
@@ -71,7 +68,7 @@ class PytactxRunner(IRunner):
     def moveRight(self) -> bool:
         x,y = self.getCoordinates()
 
-        if(x>=(WIDTH_MAZE - 1) or self.getMap()[y][x+1] == WALL):
+        if(x>=(self.__agent.gridColumns - 1) or self.getMap()[y][x+1] == WALL):
             return False
 
         self.__agent.moveTowards(self.__agent.x + 1, self.__agent.y)
