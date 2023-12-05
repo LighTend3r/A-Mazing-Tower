@@ -24,70 +24,70 @@ et collecter des pièces pour atteindre la victoire.
 #### Voici la liste des méthodes de la classe Runner :
 
 ```python
-def getCoordinates() -> tuple[int, int]:
-    """
-    Renvoie les coordonnées du runner (x, y).
-    """
+def get_coordinates() -> tuple[int, int]:
+  """
+  Renvoie les coordonnées du runner (x, y).
+  """
 
 
-def getMap() -> tuple[tuple[int]]:
-    """
-    Renvoie la carte de l'arène.
-    """
+def get_map() -> tuple[tuple[int]]:
+  """
+  Renvoie la carte de l'arène.
+  """
 
 
-def getCurrentTile() -> int:
-    """
-    Renvoie la valeur de la case sur laquelle est l'agent.
-    0 → Chemin
-    1 → Mur
-    2 → Pièce
-    Above → Portail
-    """
+def get_current_tile() -> int:
+  """
+  Renvoie la valeur de la case sur laquelle est l'agent.
+  0 → Chemin
+  1 → Mur
+  2 → Pièce
+  Above → Portail
+  """
 
 
 def update() -> None:
-    """
-    Récupérer les dernières valeurs des données du joueur sur le serveur.
-    Et envoyer les requêtes tamponnées en une seule fois pour limiter la bande passante.
-    À appeler dans la boucle principale au moins toutes les 10 msecs.
-    """
+  """
+  Récupérer les dernières valeurs des données du joueur sur le serveur.
+  Et envoyer les requêtes tamponnées en une seule fois pour limiter la bande passante.
+  À appeler dans la boucle principale au moins toutes les 10 msecs.
+  """
 
 
-def moveUp() -> bool:
-    """
-    Essaie de se déplacer vers le haut.
-    """
+def move_up() -> bool:
+  """
+  Essaie de se déplacer vers le haut.
+  """
 
 
-def moveDown() -> bool:
-    """
-    Essaie de se déplacer vers le bas.
-    """
+def move_down() -> bool:
+  """
+  Essaie de se déplacer vers le bas.
+  """
 
 
-def moveLeft() -> bool:
-    """
-    Essaie de se déplacer vers la gauche.
-    """
+def move_left() -> bool:
+  """
+  Essaie de se déplacer vers la gauche.
+  """
 
 
-def moveRight() -> bool:
-    """
-    Essaie de se déplacer vers la droite.
-    """
+def move_right() -> bool:
+  """
+  Essaie de se déplacer vers la droite.
+  """
 
 
-def takeCoin() -> bool:
-    """
-    Essaie de prendre une pièce si on est sur un case de type 'Pièce'.
-    """
+def take_coin() -> bool:
+  """
+  Essaie de prendre une pièce si on est sur un case de type 'Pièce'.
+  """
 
 
-def takePortal() -> bool:
-    """
-    Essaie de prendre un portail si on est sur une case de type 'Portail'.
-    """
+def take_portal() -> bool:
+  """
+  Essaie de prendre un portail si on est sur une case de type 'Portail'.
+  """
 ```
 
 ## ✅ Pré-requis

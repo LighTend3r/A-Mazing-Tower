@@ -1,6 +1,3 @@
-#! /usr/bin/env python3
-import j2l.pytactx.agent as pytactx
-import os
 import time
 from decouple import config
 from runner.PytactxRunner import PytactxRunner
@@ -14,7 +11,6 @@ SERVEUR = config('SERVEUR_PYTACTX')
 
 print(ARENA, PLAYER_ID, USERNAME, PASS, SERVEUR)
 
-
 agent = PytactxRunner(PLAYER_ID)
 
 time.sleep(5)
@@ -22,25 +18,23 @@ time.sleep(5)
 agent.update()
 
 while 1:
-    current_tile = agent.getCurrentTile()
-    direction = random.randint(0,3)
-    
-    if(current_tile == 2):
-        agent.takeCoin()
-    elif(current_tile > 2):
-        agent.takePortal()
+    current_tile = agent.get_current_tile()
+    direction = random.randint(0, 3)
 
-    
+    if current_tile == 2:
+        agent.take_coin()
+    elif current_tile > 2:
+        agent.take_portal()
+
     agent.update()
 
-    
     if direction == 0:
-        agent.moveUp()
+        agent.move_up()
     elif direction == 1:
-        agent.moveDown()
+        agent.move_down()
     elif direction == 2:
-        agent.moveLeft()
+        agent.move_left()
     else:
-        agent.moveRight()
-    
+        agent.move_right()
+
     agent.update()

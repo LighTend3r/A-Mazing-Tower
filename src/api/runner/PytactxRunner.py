@@ -3,90 +3,83 @@ import j2l.pytactx.agent as pytactx
 
 from decouple import config
 from runner.IRunner import IRunner
+from runner.Case import Case
+from runner.Direction import Direction
 
 ARENA = config('ARENA_PYTACTX')
 USERNAME = config('USERNAME_PYTACTX')
 PASS = config('PASS_PYTACTX')
 SERVEUR = config('SERVEUR_PYTACTX')
 
-WALL = 1
-COIN = 2
-
 HEIGHT_MAZE = 22
 WIDTH_MAZE = 22
 
-dir = {
-    "TAKE_COIN": 0,
-    "DEFAULT": 1,
-    "TAKE_PORTAL": 2
-}
-
 
 class PytactxRunner(IRunner):
-    def __init__(self, playerId: str) -> None:
-        self.__agent = pytactx.Agent(playerId, ARENA, USERNAME, PASS, SERVEUR, verbosity=2)
+    def __init__(self, player_id: str) -> None:
+        self.__agent = pytactx.Agent(player_id, ARENA, USERNAME, PASS, SERVEUR, verbosity=2)
 
-    def getCoordinates(self) -> tuple[int, int]:
-        return (self.__agent.x, self.__agent.y)
+    def get_coordinates(self) -> tuple[int, int]:
+        return self.__agent.x, self.__agent.y
 
-    def getMap(self) -> tuple[tuple[int]]:
+    def get_map(self) -> tuple[tuple[int]]:
         return self.__agent.map
 
-    def getCurrentTile(self) -> int:
-        x, y = self.getCoordinates()
+    def get_current_tile(self) -> int:
+        x, y = self.get_coordinates()
         return self.__agent.map[y][x]
 
     def update(self) -> None:
         self.__agent.update()
 
-    def moveUp(self) -> bool:
-        x, y = self.getCoordinates()
+    def move_up(self) -> bool:
+        x, y = self.get_coordinates()
 
-        if (y <= 0 or self.getMap()[y - 1][x] == WALL):
+        if y <= 0 or self.get_map()[y - 1][x] == Case.WALL.value:
             return False
 
         self.__agent.moveTowards(self.__agent.x, self.__agent.y - 1)
         return True
 
-    def moveDown(self) -> bool:
-        x, y = self.getCoordinates()
+    def move_down(self) -> bool:
+        x, y = self.get_coordinates()
 
-        if (y >= (HEIGHT_MAZE - 1) or self.getMap()[y + 1][x] == WALL):
+        if y >= (HEIGHT_MAZE - 1) or self.get_map()[y + 1][x] == Case.WALL.value:
             return False
 
         self.__agent.moveTowards(self.__agent.x, self.__agent.y + 1)
         return True
 
-    def moveLeft(self) -> bool:
-        x, y = self.getCoordinates()
+    def move_left(self) -> bool:
+        x, y = self.get_coordinates()
 
-        if (x <= 0 or self.getMap()[y][x - 1] == WALL):
+        if x <= 0 or self.get_map()[y][x - 1] == Case.WALL.value:
             return False
 
         self.__agent.moveTowards(self.__agent.x - 1, self.__agent.y)
         return True
 
-    def moveRight(self) -> bool:
-        x, y = self.getCoordinates()
+    def move_right(self) -> bool:
+        x, y = self.get_coordinates()
 
-        if (x >= (WIDTH_MAZE - 1) or self.getMap()[y][x + 1] == WALL):
+        if x >= (WIDTH_MAZE - 1) or self.get_map()[y][x + 1] == Case.WALL.value:
             return False
 
         self.__agent.moveTowards(self.__agent.x + 1, self.__agent.y)
         return True
 
-    def takeCoin(self) -> bool:
-        if (self.__agent.map[self.__agent.y][self.__agent.x] != COIN):
-            self.__agent.lookAt(dir['DEFAULT'])
-            return False
+    def take_coin(self) -> bool:
+        if self.__agent.map[self.__agent.y][self.__agent.x] == Case.COIN.value:
+            self.__agent.lookAt(Direction.TAKE_COIN.value)
+            return True
 
-        self.__agent.lookAt(dir['TAKE_COIN'])
-        return True
+        self.__agent.lookAt(Direction.DEFAULT.value)
+        return False
 
-    def takePortal(self) -> bool:
-        if (self.__agent.map[self.__agent.y][self.__agent.x] <= COIN):
-            self.__agent.lookAt(dir['DEFAULT'])
-            return False
+    def take_portal(self) -> bool:
+        if self.__agent.map[self.__agent.y][self.__agent.x] >= Case.PORTALS.value:
+            self.__agent.lookAt(Direction.TAKE_PORTAL.value)
+            return True
 
-        self.__agent.lookAt(dir['TAKE_PORTAL'])
-        return True
+        self.__agent.lookAt(Direction.DEFAULT.value)
+        return False

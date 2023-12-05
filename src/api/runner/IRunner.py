@@ -1,17 +1,17 @@
 class IRunner:
-    def getCoordinates(self) -> tuple[int, int]:
+    def get_coordinates(self) -> tuple[int, int]:
         """
         Return the coordinates in the map, x and y.
         """
         ...
 
-    def getMap(self) -> tuple[tuple[int]]:
+    def get_map(self) -> tuple[tuple[int]]:
         """
         Return the map.
         """
         ...
 
-    def getCurrentTile(self) -> int:
+    def get_current_tile(self) -> int:
         """
         Return the current tile value
         \n0 -> Path
@@ -29,45 +29,44 @@ class IRunner:
         """
         ...
 
-    def moveUp(self) -> bool:
+    def move_up(self) -> bool:
         """
         Try to move upward if possible.
         If not return False.
         """
         ...
-    
-    def moveDown(self) -> bool:
+
+    def move_down(self) -> bool:
         """
         Try to move downward if possible.
         If not return False.
         """
         ...
-    
-    def moveLeft(self) -> bool:
+
+    def move_left(self) -> bool:
         """
         Try to move to the left if possible.
         If not return False.
         """
         ...
-    
-    def moveRight(self) -> bool:
+
+    def move_right(self) -> bool:
         """
         Try to move to the right if possible.
         If not return False.
         """
         ...
 
-    def takeCoin(self) -> bool:
+    def take_coin(self) -> bool:
         """
         Try to take a coin at the current position.
         If there is a coin return True, return False.
         """
         ...
 
-    def takePortal(self) -> bool:
+    def take_portal(self) -> bool:
         """
         Try to take a portal at the current position.
         If there is a portal return True, return False.
         """
         ...
-    
