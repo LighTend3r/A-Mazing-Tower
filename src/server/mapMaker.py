@@ -23,10 +23,10 @@ MAP_FRICTION = [0,1,0,0,0,0]
 
 ROW = 2
 COLONE = 2
-TAILLE_ROW = 15
-TAILLE_COLONE = 15
+TAILLE_ROW = 10
+TAILLE_COLONE = 10
 PROBA = 10
-PIECE = 100
+PIECE = 5
 
 assert(len(MAP_IMGS) == len(MAP_FRICTION)), "MAP_IMGS and MAP_FRICTION must have the same length"
 
@@ -92,7 +92,6 @@ agent.update()
 while 1:
     multiMaze:MultiMaze.MultiMaze = makeMaze.makeMultiMaze(ROW,COLONE,TAILLE_ROW,TAILLE_COLONE,p=PROBA)
     makeMaze.set_random_coin(multiMaze, PIECE)
-    makeMaze.set_random_portal(multiMaze, 2)
     makeMaze.set_spawn(multiMaze)
 
     agent.ruleArena("map", multiMaze.get_all_maze())
