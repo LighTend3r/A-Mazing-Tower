@@ -23,9 +23,10 @@ MAP_FRICTION = [0,1,0,0,0,0]
 
 ROW = 2
 COLONE = 2
-TAILLE_ROW = 10
-TAILLE_COLONE = 10
+TAILLE_ROW = 15
+TAILLE_COLONE = 15
 PROBA = 10
+PIECE = 100
 
 assert(len(MAP_IMGS) == len(MAP_FRICTION)), "MAP_IMGS and MAP_FRICTION must have the same length"
 
@@ -59,17 +60,23 @@ agent.ruleArena("bgImg", "grass.jpg")
 agent.ruleArena("mapImgs", MAP_IMGS)
 agent.ruleArena("mapFriction", MAP_FRICTION)
 
-agent.ruleArena("profiles", ['runner', 'arbitre', 'test'])
-agent.ruleArena("pIcons", ['', '', ''])
-agent.ruleArena("weapons", ['none','none','none'])
-agent.ruleArena("hitCollision", [0,0,0])
-agent.ruleArena("collision", [False, False, False])
-agent.ruleArena("range", [0,0,0]) # Permet de voir tout les joueurs
+agent.ruleArena("profiles", ['runner', 'arbitre', 'test', 'test', 'test'])
+agent.ruleArena("pIcons", ['' for i in range(5)])
+agent.ruleArena("weapons", ['none' for i in range(5)])
+agent.ruleArena("hitCollision", [0 for i in range(5)])
+agent.ruleArena("collision", [False for i in range(5)])
+agent.ruleArena("range", [0 for i in range(5)]) # Permet de voir tout les joueurs
+
+agent.ruleArena("score", "")
+agent.ruleArena("mapHit", [0 for i in range(5)])
+agent.ruleArena("mapBreakable", [False for i in range(5)])
+agent.ruleArena("lifeIni", [1 for i in range(5)])
+agent.ruleArena("ammoIni", [0 for i in range(5)])
 
 
 
 
-agent.ruleArena("teamNb", [False, False, False])
+agent.ruleArena("teamNb", [False for i in range(5)])
 
 agent.ruleArena("api", "https://blog.lightender.fr/tkt/")
 agent.ruleArena("help", "https://blog.lightender.fr/tkt/")
@@ -83,7 +90,8 @@ agent.update()
 
 while 1:
     multiMaze:MultiMaze.MultiMaze = makeMaze.makeMultiMaze(ROW,COLONE,TAILLE_ROW,TAILLE_COLONE,p=PROBA)
-    makeMaze.set_random_coin(multiMaze, 1)
+    makeMaze.set_random_coin(multiMaze, PIECE)
+    makeMaze.set_random_portal(multiMaze, 2)
     makeMaze.set_spawn(multiMaze)
 
     agent.ruleArena("map", multiMaze.get_all_maze())
@@ -94,6 +102,7 @@ while 1:
     for agentId in agent.range.keys():
         agent.rulePlayer(agentId, "x", spawn[0])
         agent.rulePlayer(agentId, "y", spawn[1])
+        agent.rulePlayer(agentId, "score", 0)
     time.sleep(2)
     agent.update()
     print(multiMaze.get_all_portal_name())
@@ -109,8 +118,9 @@ while 1:
                 x, y = get_coordonnee(agentId, agent)
                 multiMaze.set_tile(x,y, multiMaze.get_floor())
                 multiMaze.set_nbCoin(multiMaze.get_nbCoin() - 1)
-
+                agent.rulePlayer(agentId, "score", agent.range[agentId]['score'] + 1)
                 agent.rulePlayer(agentId, "dir", 1)
+                agent.rulePlayer(agentId, "pdir", 1)
 
 
 
@@ -123,8 +133,10 @@ while 1:
                     agent.rulePlayer(agentId, "x", next_y)
                     agent.rulePlayer(agentId, "y", next_x)
                     agent.rulePlayer(agentId, "dir", 1)
-            if agent.range[agentId]['dir'] != 1:
-                agent.rulePlayer(agentId, "dir", 1)
+                    agent.rulePlayer(agentId, "pdir", 1)
+            # if agent.range[agentId]['dir'] != 1:
+            #     agent.rulePlayer(agentId, "dir", 1)
+            #     agent.rulePlayer(agentId, "pdir", 1)
         agent.ruleArena("map", multiMaze.get_all_maze())
         agent.update()
         if multiMaze.get_nbCoin() == 0:
