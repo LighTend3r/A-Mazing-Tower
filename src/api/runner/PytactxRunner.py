@@ -11,9 +11,6 @@ USERNAME = config('USERNAME_PYTACTX')
 PASS = config('PASS_PYTACTX')
 SERVEUR = config('SERVEUR_PYTACTX')
 
-HEIGHT_MAZE = 22
-WIDTH_MAZE = 22
-
 
 class PytactxRunner(IRunner):
     def __init__(self, player_id: str) -> None:
@@ -44,7 +41,7 @@ class PytactxRunner(IRunner):
     def move_down(self) -> bool:
         x, y = self.get_coordinates()
 
-        if y >= (HEIGHT_MAZE - 1) or self.get_map()[y + 1][x] == Case.WALL.value:
+        if y >= self.__agent.gridRows - 1 or self.getMap()[y + 1][x] == Case.WALL.value:
             return False
 
         self.__agent.moveTowards(self.__agent.x, self.__agent.y + 1)
@@ -62,7 +59,7 @@ class PytactxRunner(IRunner):
     def move_right(self) -> bool:
         x, y = self.get_coordinates()
 
-        if x >= (WIDTH_MAZE - 1) or self.get_map()[y][x + 1] == Case.WALL.value:
+        if x >= (self.__agent.gridColumns - 1) or self.get_map()[y][x + 1] == Case.WALL.value:
             return False
 
         self.__agent.moveTowards(self.__agent.x + 1, self.__agent.y)
