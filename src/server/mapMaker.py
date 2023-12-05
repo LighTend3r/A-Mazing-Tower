@@ -18,7 +18,7 @@ USERNAME = config('USERNAME_PYTACTX')
 PASS = config('PASS_PYTACTX')
 SERVEUR = config('SERVEUR_PYTACTX')
 
-MAP_IMGS = ["","https://github.com/LighTend3r/A-Mazing-Tower/blob/main/doc/carre_noir.png?raw=true", "https://github.com/LighTend3r/A-Mazing-Tower/blob/main/doc/coin.png?raw=true", "d0.png", "d1.png", "d2.png"]
+MAP_IMGS = ["","https://github.com/LighTend3r/A-Mazing-Tower/blob/main/doc/carre_noir.png?raw=true", "https://github.com/LighTend3r/A-Mazing-Tower/blob/main/doc/coin.png?raw=true", "https://github.com/LighTend3r/A-Mazing-Tower/blob/main/doc/carre_noir.png?raw=true", "https://github.com/LighTend3r/A-Mazing-Tower/blob/main/doc/portal_blue.png?raw=true", "https://github.com/LighTend3r/A-Mazing-Tower/blob/main/doc/portal_green.png?raw=true", "https://github.com/LighTend3r/A-Mazing-Tower/blob/main/doc/portal_purple.png?raw=true", "https://github.com/LighTend3r/A-Mazing-Tower/blob/main/doc/portal_red.png?raw=true"]
 MAP_FRICTION = [0,1,0,0,0,0]
 
 ROW = 2
