@@ -41,7 +41,7 @@ class PytactxRunner(IRunner):
     def move_down(self) -> bool:
         x, y = self.get_coordinates()
 
-        if y >= self.__agent.gridRows - 1 or self.getMap()[y + 1][x] == Case.WALL.value:
+        if y >= self.__agent.gridRows - 1 or self.get_map()[y + 1][x] == Case.WALL.value:
             return False
 
         self.__agent.moveTowards(self.__agent.x, self.__agent.y + 1)
