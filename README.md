@@ -72,7 +72,7 @@ Pour les prérequis des apprenants, veuillez vous référer au [README](/src/api
 
 ## ⚙️ Installation
 
-- `pip install paho-mqtt pillow requests`
+- `pip install paho-mqtt pillow requests python-decouple`
 - `git clone https://github.com/LighTend3r/A-Mazing-Tower.git`
 - `cd scr/server`
 - `python mapMaker.py`

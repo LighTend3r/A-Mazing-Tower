@@ -98,7 +98,7 @@ def takePortal() -> bool:
 
 ## ⚙️ Installation
 
-- `pip install paho-mqtt pillow requests`
+- `pip install paho-mqtt pillow requests python-decouple`
 - `git clone https://github.com/LighTend3r/A-Mazing-Tower.git`
 - `cd scr/api`
 - ***`faire un bot`*** 🤖
