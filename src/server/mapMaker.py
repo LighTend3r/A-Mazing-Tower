@@ -18,15 +18,17 @@ USERNAME = config('USERNAME_PYTACTX')
 PASS = config('PASS_PYTACTX')
 SERVEUR = config('SERVEUR_PYTACTX')
 
-MAP_IMGS = ["","https://github.com/LighTend3r/A-Mazing-Tower/blob/main/doc/carre_noir.png?raw=true", "https://github.com/LighTend3r/A-Mazing-Tower/blob/main/doc/coin.png?raw=true", "d0.png", "d1.png", "d2.png"]
-MAP_FRICTION = [0,1,0,0,0,0]
+GIT_PATH = "https://github.com/LighTend3r/A-Mazing-Tower/blob/main/doc/"
+
+MAP_IMGS = ["",GIT_PATH + "carre_noir.png?raw=true", GIT_PATH + "coin.png?raw=true", GIT_PATH + "portal_blue.png?raw=true", GIT_PATH + "portal_green.png?raw=true", GIT_PATH + "portal_purple.png?raw=true", GIT_PATH + "portal_red.png?raw=true"]
+MAP_FRICTION = [0,1,0,0,0,0,0]
 
 ROW = 2
 COLONE = 2
-TAILLE_ROW = 15
-TAILLE_COLONE = 15
+TAILLE_ROW = 10
+TAILLE_COLONE = 10
 PROBA = 10
-PIECE = 100
+PIECE = 30
 
 assert(len(MAP_IMGS) == len(MAP_FRICTION)), "MAP_IMGS and MAP_FRICTION must have the same length"
 
@@ -65,14 +67,16 @@ agent.ruleArena("profiles", ['runner', 'arbitre', 'test', 'test', 'test'])
 agent.ruleArena("pIcons", ['' for i in range(5)])
 agent.ruleArena("weapons", ['none' for i in range(5)])
 agent.ruleArena("hitCollision", [0 for i in range(5)])
+agent.ruleArena("collisionMap", [True for i in range(5)])
 agent.ruleArena("collision", [False for i in range(5)])
 agent.ruleArena("range", [0 for i in range(5)]) # Permet de voir tout les joueurs
 
 agent.ruleArena("score", "")
-agent.ruleArena("mapHit", [0 for i in range(5)])
-agent.ruleArena("mapBreakable", [False for i in range(5)])
+agent.ruleArena("mapHit", [0 for i in range(len(MAP_IMGS))])
+agent.ruleArena("mapBreakable", [False for i in range(len(MAP_IMGS))])
 agent.ruleArena("lifeIni", [1 for i in range(5)])
 agent.ruleArena("ammoIni", [0 for i in range(5)])
+agent.ruleArena("dDirMax", [90 for i in range(5)])
 
 
 
@@ -92,7 +96,6 @@ agent.update()
 while 1:
     multiMaze:MultiMaze.MultiMaze = makeMaze.makeMultiMaze(ROW,COLONE,TAILLE_ROW,TAILLE_COLONE,p=PROBA)
     makeMaze.set_random_coin(multiMaze, PIECE)
-    makeMaze.set_random_portal(multiMaze, 2)
     makeMaze.set_spawn(multiMaze)
 
     agent.ruleArena("map", multiMaze.get_all_maze())
