@@ -41,7 +41,7 @@ bonnes pratiques de programmation de manière ludique.
 
 Un administrateur peut/doit :
 - Remplir le fichier [.env](.env) avec les paramètres de l'arène et de l'arbitre
-- Exécuter le fichier [mapMaker.py](src/server/mapMaker.py) comme décrit dans la section [Installation](#-installation)
+- Exécuter le fichier [mapMaker.py](src/server/mapMaker.py) comme décrit dans la section [Installation](#user-content-️-installation)
 
 ### Pour le Joueur
 
