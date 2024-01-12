@@ -91,8 +91,7 @@ Et voila 👍
 
 ## 🛣️ Roadmap
 
-[Insérer la roadmap du projet, décrivant les fonctionnalités futures, les améliorations, etc.]
-Ce qui reste à faire, priorisé dans le temps.
+Il reste le bonus et malus à implémenter, pour plus de méchanique et de complexité.
 
 ## 🧑‍💻 AuteurS
 
