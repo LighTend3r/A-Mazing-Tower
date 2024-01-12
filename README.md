@@ -91,7 +91,7 @@ Et voila 👍
 
 ## 🛣️ Roadmap
 
-Il reste le bonus et malus à implémenter, pour plus de méchanique et de complexité.
+Il reste le bonus et malus à implémenter, pour plus de mécanique et de complexité.
 
 ## 🧑‍💻 AuteurS
 
