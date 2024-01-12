@@ -80,3 +80,6 @@ class PytactxRunner(IRunner):
 
         self.__agent.lookAt(Direction.DEFAULT.value)
         return False
+
+    def reset_dir(self):
+        self.__agent.lookAt(Direction.DEFAULT.value)

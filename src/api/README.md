@@ -88,6 +88,11 @@ def take_portal() -> bool:
   """
   Essaie de prendre un portail si on est sur une case de type 'Portail'.
   """
+
+def reset_dir(self):
+    """
+    Reset the direction of the agent.
+    """
 ```
 
 ## ✅ Pré-requis

@@ -70,3 +70,9 @@ class IRunner:
         If there is a portal return True, return False.
         """
         ...
+
+    def reset_dir(self):
+        """
+        Reset the direction of the agent.
+        """
+        ...

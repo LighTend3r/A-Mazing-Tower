@@ -87,6 +87,7 @@ class AgentExample:
         while (self.__closest_coin is None or
                self.__agent.get_map()[self.__closest_coin[1]][self.__closest_coin[0]] != Case.COIN.value):
             self.__search_closest_coin()
+            self.__agent.update()
 
         next_action = self.__path.pop(0)
 
@@ -114,6 +115,8 @@ class AgentExample:
 
             while (x, y) == self.__agent.get_coordinates() and self.__closest_coin is not None:
                 self.__agent.update()
+
+            self.__agent.reset_dir()
 
 
 if __name__ == "__main__":
