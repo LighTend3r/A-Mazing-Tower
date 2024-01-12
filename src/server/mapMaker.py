@@ -64,6 +64,7 @@ agent.ruleArena("mapImgs", MAP_IMGS)
 agent.ruleArena("mapFriction", MAP_FRICTION)
 
 agent.ruleArena("profiles", ['runner', 'arbitre', 'test', 'test', 'test'])
+agent.ruleArena("invisible", [False,True,False,False,False])
 agent.ruleArena("pIcons", ['' for i in range(5)])
 agent.ruleArena("weapons", ['none' for i in range(5)])
 agent.ruleArena("hitCollision", [0 for i in range(5)])
@@ -83,8 +84,8 @@ agent.ruleArena("dDirMax", [90 for i in range(5)])
 
 agent.ruleArena("teamNb", [False for i in range(5)])
 
-agent.ruleArena("api", "https://blog.lightender.fr/tkt/")
-agent.ruleArena("help", "https://blog.lightender.fr/tkt/")
+agent.ruleArena("api", "https://github.com/LighTend3r/A-Mazing-Tower")
+agent.ruleArena("help", "https://github.com/LighTend3r/A-Mazing-Tower")
 
 
 

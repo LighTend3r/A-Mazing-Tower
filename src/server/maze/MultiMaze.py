@@ -103,7 +103,6 @@ class MultiMaze:
             return [i for i in range(mini, mini + self.__nbPortal)]
         return ["P" + str(i) for i in range(self.__nbPortal)]
 
-
     def get_all_row(self) -> int:
         """Récupère le nombre de ligne de la grille de labyrinthe complèter par les sous-labyrinthes
         """

@@ -30,7 +30,6 @@ class MakeMaze:
         """
         self.__coin = coin
 
-
     def makeMultiMaze(self, row:int = 1, column:int = 1, taille_row:int = 10, taille_column:int = 10, p: int = 0) -> MultiMaze:
         """Créé un labyrinthe avec des labyrinthes plus petit
 
@@ -71,6 +70,7 @@ class MakeMaze:
         multiMaze.set_grid(grid)
 
         return multiMaze
+
     def set_spawn(self, multiMaze: MultiMaze):
         # set le spawn
         x = random.randint(0, multiMaze.get_all_row()-1)
@@ -180,9 +180,6 @@ class MakeMaze:
                 maze2.get_grid()[x][y] = marker
                 portal2_placed = True
 
-
-
-
     def __set_random_coin_on_one_maze(self, maze: Maze, nb_coin: int, plan:List[List[int]]=[[-1, -1], [-1, -1]]):
         start_x = 0 if plan[0][0] == -1 else plan[0][0]
         start_y = 0 if plan[0][1] == -1 else plan[0][1]
@@ -220,7 +217,6 @@ class MakeMaze:
                 if possible:
                     maze.get_grid()[x][y] = self.__floor
                     nb_wall_delete -= 1
-
 
     def __countWall(self, maze: Maze,plan:List[List[int]]=[[-1, -1], [-1, -1]]):
         start_x = 0 if plan[0][0] == -1 else plan[0][0]
@@ -290,9 +286,3 @@ class MakeMaze:
         else:
             pile.pop()
             self.__makeMazeRecursif(maze, pile, start_x, start_y, end_x, end_y)
-
-
-
-    def makeMaze2(self, maze: Maze):
-        pass
-
