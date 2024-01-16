@@ -91,7 +91,7 @@ def take_portal() -> bool:
 
 def reset_dir(self):
     """
-    Reset the direction of the agent.
+    Remet la direction de l'agent à défaut.
     """
 ```
 
