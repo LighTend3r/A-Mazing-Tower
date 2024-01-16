@@ -14,6 +14,9 @@ class AgentExample:
         self.__nb_coins = 0
 
     def __get_portals(self):
+        """
+        Renvoie les portails de la carte.
+        """
         portals = {}
 
         for y, ligne in enumerate(self.__agent.get_map()):
@@ -30,6 +33,10 @@ class AgentExample:
         return portals
 
     def __add_to_queue(self, map_already_seen, maze_map, x, y, queue, actions, action):
+        """
+        Ajoute au chemin l'action et marque la case comme déjà visité.
+        Si on est sur une pièce, on la stocke.
+        """
         if map_already_seen[y][x]:
             return
 
@@ -42,6 +49,11 @@ class AgentExample:
         queue.append([(x, y), actions + [action]])
 
     def __search_closest_coin(self):
+        """
+        Cherche la pièce la plus proche et la stocke dans self.__closest_coin,
+        le chemin pour y accéder et stocker dans self.__path.
+        """
+        self.__closest_coin = None
         self.__path = []
         maze_map = self.__agent.get_map()
         map_already_seen = [[False] * len(maze_map[0]) for _ in range(len(maze_map))]
@@ -84,6 +96,9 @@ class AgentExample:
                     last_pos_last_range = queue[-1][0]
 
     def __turn(self):
+        """
+        Fais l'action pour atteindre la pièce la plus proche.
+        """
         while (self.__closest_coin is None or
                self.__agent.get_map()[self.__closest_coin[1]][self.__closest_coin[0]] != Case.COIN.value):
             self.__search_closest_coin()
@@ -107,6 +122,9 @@ class AgentExample:
                 self.__closest_coin = None
 
     def main(self):
+        """
+        Boucle infinie qui exécute chaque tour et fais un update sur le serveur.
+        """
         while True:
             (x, y) = self.__agent.get_coordinates()
             self.__turn()
