@@ -15,9 +15,10 @@ class AgentExample:
 
     def __get_portals(self):
         """
-        Renvoie les portails de la carte.
+        Renvoie les portails de la carte et compte le nombre de pièces.
         """
         portals = {}
+        self.__nb_coins = 0
 
         for y, ligne in enumerate(self.__agent.get_map()):
             for x, case in enumerate(ligne):
@@ -53,19 +54,34 @@ class AgentExample:
         Cherche la pièce la plus proche et la stocke dans self.__closest_coin,
         le chemin pour y accéder et stocker dans self.__path.
         """
-        self.__closest_coin = None
-        self.__path = []
         maze_map = self.__agent.get_map()
-        map_already_seen = [[False] * len(maze_map[0]) for _ in range(len(maze_map))]
-        portals = self.__get_portals()
+        (x, y) = self.__agent.get_coordinates()
 
-        if self.__nb_coins == 0:
+        if maze_map[y][x] == Case.COIN.value:
+            self.__closest_coin = (x, y)
+            self.__path = ["COIN"]
+            print("a")
             return
 
-        queue = [[self.__agent.get_coordinates(), []]]
-        range_search = 0
-        last_pos_last_range = queue[0][0]
-        map_already_seen[queue[0][0][1]][queue[0][0][0]] = True
+        if self.__closest_coin is not None and maze_map[self.__closest_coin[1]][self.__closest_coin[0]] == Case.COIN.value:
+            print("b")
+            return
+
+        portals = self.__get_portals()
+
+        while self.__nb_coins == 0:
+            portals = self.__get_portals()
+            self.__agent.update()
+        print(self.__nb_coins)
+
+        maze_map = self.__agent.get_map()
+        (x, y) = self.__agent.get_coordinates()
+        self.__closest_coin = None
+        self.__path = []
+        map_already_seen = [[False] * len(maze_map[0]) for _ in range(len(maze_map))]
+
+        queue = [[(x, y), []]]
+        map_already_seen[y][x] = True
 
         while len(queue) != 0 and self.__closest_coin is None:
             (x, y), actions = queue.pop(0)
@@ -90,19 +106,15 @@ class AgentExample:
 
                 self.__add_to_queue(map_already_seen, maze_map, new_x, new_y, queue, actions, "TP")
 
-            if (x, y) == last_pos_last_range:
-                range_search += 1
-                if len(queue) != 0:
-                    last_pos_last_range = queue[-1][0]
 
     def __turn(self):
         """
         Fais l'action pour atteindre la pièce la plus proche.
         """
-        while (self.__closest_coin is None or
-               self.__agent.get_map()[self.__closest_coin[1]][self.__closest_coin[0]] != Case.COIN.value):
-            self.__search_closest_coin()
-            self.__agent.update()
+        self.__search_closest_coin()
+        print(self.__path)
+        print(self.__closest_coin)
+        print()
 
         next_action = self.__path.pop(0)
 
