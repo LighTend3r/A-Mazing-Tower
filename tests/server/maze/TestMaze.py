@@ -1,5 +1,5 @@
 import unittest
-import sys 
+import sys
 
 sys.path.append("../../src/server")
 import maze.Maze as Maze
@@ -9,9 +9,9 @@ class TestMaze(unittest.TestCase):
     def test_get_column(self):
         maze = Maze(15, 10, 1, 0, 2)
         self.assertEqual(maze.get_column(), 10)
-        
+
         self.assertNotEqual(maze.get_column(), 15)
-    
+
     def test_get_row(self):
         maze = Maze(15, 10, 1, 0, 2)
         self.assertEqual(maze.get_row(), 15)
@@ -23,7 +23,7 @@ class TestMaze(unittest.TestCase):
         for i in range(0, 4):
             for j in range(0, 4):
                 maze.set_tile(i, j, 0)
-        
+
         maze.set_tile(0, 0, 1)
 
         maze.set_tile(3, 0, 2)
@@ -42,7 +42,7 @@ class TestMaze(unittest.TestCase):
         for i in range(0, 4):
             for j in range(0, 4):
                 maze.set_tile(i, j, 0)
-        
+
         maze.set_tile(0, 0, 1)
 
         maze.set_tile(3, 0, 2)
@@ -61,7 +61,7 @@ class TestMaze(unittest.TestCase):
         for i in range(0, 4):
             for j in range(0, 4):
                 maze.set_tile(i, j, 0)
-        
+
         maze.set_tile(0, 0, 1)
         maze.set_tile(1, 1, 1)
         maze.set_tile(2, 1, 1)

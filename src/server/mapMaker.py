@@ -102,7 +102,6 @@ while 1:
     agent.ruleArena("map", multiMaze.get_all_maze())
     agent.ruleArena("spawnArea", {"x": [multiMaze.get_spawn()[1] for i in range(3)], "y": [multiMaze.get_spawn()[0] for i in range(3)], "r": [0,0,0]})
 
-    # TODO: Faire un patron état sur la partie (peut être)
     spawn = multiMaze.get_spawn()
     for agentId in agent.range.keys():
         agent.rulePlayer(agentId, "x", spawn[0])

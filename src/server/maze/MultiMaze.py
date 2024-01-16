@@ -114,7 +114,6 @@ class MultiMaze:
         return self.get_maze(0,0).get_column() * self.get_column() + 2 + self.get_column()-1
 
     def get_tile(self, x:int , y:int) -> int | str:
-        # TODO: On pourrait accélérer la recherche en utilisant la position du labyrinthe
         """Récupère la tuile en position x,y
         """
         return self.get_all_maze()[x][y]
