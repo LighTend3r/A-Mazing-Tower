@@ -1,7 +1,7 @@
 import unittest
 import sys
 
-sys.path.append("../../src/server")
+sys.path.append("../../../src/server")
 import maze.Maze as Maze
 
 class TestMaze(unittest.TestCase):

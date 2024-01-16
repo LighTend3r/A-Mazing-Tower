@@ -138,9 +138,7 @@ while 1:
                     agent.rulePlayer(agentId, "y", next_x)
                     agent.rulePlayer(agentId, "dir", 1)
                     agent.rulePlayer(agentId, "pdir", 1)
-            # if agent.range[agentId]['dir'] != 1:
-            #     agent.rulePlayer(agentId, "dir", 1)
-            #     agent.rulePlayer(agentId, "pdir", 1)
+
         agent.ruleArena("map", multiMaze.get_all_maze())
         agent.update()
         if multiMaze.get_nbCoin() == 0:
