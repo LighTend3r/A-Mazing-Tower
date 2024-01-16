@@ -1,0 +1,28 @@
+sequenceDiagram
+    participant Utilisateur
+    participant MakeMaze
+    participant MultiMaze
+    participant Agent as pytactx.Agent
+    participant Serveur
+
+    Utilisateur->>MakeMaze: new MakeMaze()
+    MakeMaze->>MakeMaze: setWall(1)
+    MakeMaze->>MakeMaze: setFloor(0)
+    MakeMaze->>MakeMaze: setCoin(2)
+    MakeMaze->>MultiMaze: makeMultiMaze(ROW, COLONE, TAILLE_ROW, TAILLE_COLONE, p=PROBA)
+    MultiMaze-->>MakeMaze: return multiMaze
+    MakeMaze->>MultiMaze: set_random_coin(multiMaze, 5)
+    MakeMaze->>MultiMaze: set_spawn(multiMaze)
+
+    loop Mise à jour du serveur
+        Utilisateur->>Agent: update()
+        Agent->>Serveur: Envoie des règles et mises à jour
+        Serveur-->>Agent: Réponse du serveur
+    end
+
+    loop Jeu en cours
+        Agent->>MultiMaze: get_all_maze()
+        MultiMaze-->>Agent: Retourne la grille de labyrinthe
+        Agent->>Serveur: Envoie de l'état du jeu
+        Serveur-->>Agent: Réponse et mise à jour
+    end
