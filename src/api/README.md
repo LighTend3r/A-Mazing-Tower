@@ -105,7 +105,7 @@ def reset_dir(self):
 
 - `pip install paho-mqtt pillow requests python-decouple`
 - `git clone https://github.com/LighTend3r/A-Mazing-Tower.git`
-- `cd scr/api`
+- `cd src/api`
 - ***`faire un bot`*** 🤖
 - `python main.py`
 
