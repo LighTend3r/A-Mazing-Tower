@@ -2,7 +2,7 @@
 import j2l.pytactx.agent as pytactx
 from decouple import config
 import time
-
+import json
 
 from maze import *
 
@@ -20,9 +20,6 @@ SERVEUR = config('SERVEUR_PYTACTX')
 
 GIT_PATH = "https://github.com/LighTend3r/A-Mazing-Tower/blob/main/doc/"
 
-MAP_IMGS = ["",GIT_PATH + "carre_noir.png?raw=true", GIT_PATH + "coin.png?raw=true", GIT_PATH + "portal_blue.png?raw=true", GIT_PATH + "portal_green.png?raw=true", GIT_PATH + "portal_purple.png?raw=true", GIT_PATH + "portal_red.png?raw=true"]
-MAP_FRICTION = [0,1,0,0,0,0,0]
-
 ROW = 2
 COLONE = 2
 TAILLE_ROW = 10
@@ -30,7 +27,6 @@ TAILLE_COLONE = 10
 PROBA = 10
 PIECE = 30
 
-assert(len(MAP_IMGS) == len(MAP_FRICTION)), "MAP_IMGS and MAP_FRICTION must have the same length"
 
 
 agent:pytactx.Agent = pytactx.Agent(playerId=PLAYERID,
@@ -54,38 +50,45 @@ makeMaze.set_random_coin(multiMaze, 5)
 makeMaze.set_spawn(multiMaze)
 ### MISE EN PLACE DES REGLES ###
 
-agent.ruleArena("gridColumns", multiMaze.get_all_column())
-agent.ruleArena("gridRows", multiMaze.get_all_row())
+with open('rule.json', 'r') as file:
+    data = json.load(file)
 
-agent.ruleArena("bgImg", "https://github.com/LighTend3r/A-Mazing-Tower/blob/main/doc/carre_blanc.png?raw=true")
+for item in data['ruleArena']:
+    key = item['key']
+    value = item['value']
+    agent.ruleArena(key, value)
+# agent.ruleArena("gridColumns", multiMaze.get_all_column())
+# agent.ruleArena("gridRows", multiMaze.get_all_row())
 
-
-agent.ruleArena("mapImgs", MAP_IMGS)
-agent.ruleArena("mapFriction", MAP_FRICTION)
-
-agent.ruleArena("profiles", ['runner', 'arbitre', 'test', 'test', 'test'])
-agent.ruleArena("invisible", [False,True,False,False,False])
-agent.ruleArena("pIcons", ['' for i in range(5)])
-agent.ruleArena("weapons", ['none' for i in range(5)])
-agent.ruleArena("hitCollision", [0 for i in range(5)])
-agent.ruleArena("collisionMap", [True for i in range(5)])
-agent.ruleArena("collision", [False for i in range(5)])
-agent.ruleArena("range", [0 for i in range(5)]) # Permet de voir tout les joueurs
-
-agent.ruleArena("score", "")
-agent.ruleArena("mapHit", [0 for i in range(len(MAP_IMGS))])
-agent.ruleArena("mapBreakable", [False for i in range(len(MAP_IMGS))])
-agent.ruleArena("lifeIni", [1 for i in range(5)])
-agent.ruleArena("ammoIni", [0 for i in range(5)])
-agent.ruleArena("dDirMax", [90 for i in range(5)])
+# agent.ruleArena("bgImg", "https://github.com/LighTend3r/A-Mazing-Tower/blob/main/doc/carre_blanc.png?raw=true")
 
 
+# agent.ruleArena("mapImgs", MAP_IMGS)
+# agent.ruleArena("mapFriction", MAP_FRICTION)
+
+# agent.ruleArena("profiles", ['runner', 'arbitre', 'test', 'test', 'test'])
+# agent.ruleArena("invisible", [False,True,False,False,False])
+# agent.ruleArena("pIcons", ['' for i in range(5)])
+# agent.ruleArena("weapons", ['none' for i in range(5)])
+# agent.ruleArena("hitCollision", [0 for i in range(5)])
+# agent.ruleArena("collisionMap", [True for i in range(5)])
+# agent.ruleArena("collision", [False for i in range(5)])
+# agent.ruleArena("range", [0 for i in range(5)]) # Permet de voir tout les joueurs
+
+# agent.ruleArena("score", "")
+# agent.ruleArena("mapHit", [0 for i in range(len(MAP_IMGS))])
+# agent.ruleArena("mapBreakable", [False for i in range(len(MAP_IMGS))])
+# agent.ruleArena("lifeIni", [1 for i in range(5)])
+# agent.ruleArena("ammoIni", [0 for i in range(5)])
+# agent.ruleArena("dDirMax", [90 for i in range(5)])
 
 
-agent.ruleArena("teamNb", [False for i in range(5)])
 
-agent.ruleArena("api", "https://github.com/LighTend3r/A-Mazing-Tower")
-agent.ruleArena("help", "https://github.com/LighTend3r/A-Mazing-Tower")
+
+# agent.ruleArena("teamNb", [False for i in range(5)])
+
+# agent.ruleArena("api", "https://github.com/LighTend3r/A-Mazing-Tower")
+# agent.ruleArena("help", "https://github.com/LighTend3r/A-Mazing-Tower")
 
 
 
