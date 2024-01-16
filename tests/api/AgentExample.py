@@ -60,11 +60,9 @@ class AgentExample:
         if maze_map[y][x] == Case.COIN.value:
             self.__closest_coin = (x, y)
             self.__path = ["COIN"]
-            print("a")
             return
 
         if self.__closest_coin is not None and maze_map[self.__closest_coin[1]][self.__closest_coin[0]] == Case.COIN.value:
-            print("b")
             return
 
         portals = self.__get_portals()
@@ -72,7 +70,6 @@ class AgentExample:
         while self.__nb_coins == 0:
             portals = self.__get_portals()
             self.__agent.update()
-        print(self.__nb_coins)
 
         maze_map = self.__agent.get_map()
         (x, y) = self.__agent.get_coordinates()
@@ -112,9 +109,6 @@ class AgentExample:
         Fais l'action pour atteindre la pièce la plus proche.
         """
         self.__search_closest_coin()
-        print(self.__path)
-        print(self.__closest_coin)
-        print()
 
         next_action = self.__path.pop(0)
 
@@ -150,4 +144,4 @@ class AgentExample:
 
 
 if __name__ == "__main__":
-    AgentExample("test_pierre").main()
+    AgentExample("test").main()
