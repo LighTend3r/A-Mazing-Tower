@@ -63,7 +63,7 @@ for item in data['ruleArena']:
 time.sleep(5)
 agent.update()
 
-while 1:
+while True:
     multiMaze:MultiMaze.MultiMaze = makeMaze.makeMultiMaze(ROW,COLONE,TAILLE_ROW,TAILLE_COLONE,p=PROBA)
     makeMaze.set_random_coin(multiMaze, PIECE)
     makeMaze.set_spawn(multiMaze)
