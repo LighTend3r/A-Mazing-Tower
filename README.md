@@ -81,7 +81,7 @@ Vous pouvez lancer le BOT de test en allant dans le répertoire : /tests/api/
 et en exécutant le fichier **AgentExemple.py**
 
 ## 🛣️ Roadmap
-
+[Trello](https://trello.com/b/R8wMPjQq/pytactx)
 Il reste le bonus et malus à implémenter, pour plus de mécanique et de complexité.
 
 ## 🧑‍💻 AuteurS
