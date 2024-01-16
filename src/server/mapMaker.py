@@ -57,40 +57,6 @@ for item in data['ruleArena']:
     key = item['key']
     value = item['value']
     agent.ruleArena(key, value)
-# agent.ruleArena("gridColumns", multiMaze.get_all_column())
-# agent.ruleArena("gridRows", multiMaze.get_all_row())
-
-# agent.ruleArena("bgImg", "https://github.com/LighTend3r/A-Mazing-Tower/blob/main/doc/carre_blanc.png?raw=true")
-
-
-# agent.ruleArena("mapImgs", MAP_IMGS)
-# agent.ruleArena("mapFriction", MAP_FRICTION)
-
-# agent.ruleArena("profiles", ['runner', 'arbitre', 'test', 'test', 'test'])
-# agent.ruleArena("invisible", [False,True,False,False,False])
-# agent.ruleArena("pIcons", ['' for i in range(5)])
-# agent.ruleArena("weapons", ['none' for i in range(5)])
-# agent.ruleArena("hitCollision", [0 for i in range(5)])
-# agent.ruleArena("collisionMap", [True for i in range(5)])
-# agent.ruleArena("collision", [False for i in range(5)])
-# agent.ruleArena("range", [0 for i in range(5)]) # Permet de voir tout les joueurs
-
-# agent.ruleArena("score", "")
-# agent.ruleArena("mapHit", [0 for i in range(len(MAP_IMGS))])
-# agent.ruleArena("mapBreakable", [False for i in range(len(MAP_IMGS))])
-# agent.ruleArena("lifeIni", [1 for i in range(5)])
-# agent.ruleArena("ammoIni", [0 for i in range(5)])
-# agent.ruleArena("dDirMax", [90 for i in range(5)])
-
-
-
-
-# agent.ruleArena("teamNb", [False for i in range(5)])
-
-# agent.ruleArena("api", "https://github.com/LighTend3r/A-Mazing-Tower")
-# agent.ruleArena("help", "https://github.com/LighTend3r/A-Mazing-Tower")
-
-
 
 ### LANCEMENT DU SERVEUR ###
 
