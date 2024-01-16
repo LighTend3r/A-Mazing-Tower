@@ -49,15 +49,9 @@ Pour les informations sur le joueur, veuillez vous référer au [README](/src/ap
 
 ## 📞 Diagramme de Séquence
 
-[Expliquer le déroulé d'une partie à l'aide d'un diagramme de séquence. Décrire les principales étapes et comment les couches s'échangent des données.]
-Expliquer les points suivants :
+Voici le diagrame de séquence de notre jeu (côté serveur) :
 
-- [ ] les acteurs
-- [ ] le déroulé d'une partie en partant des use case
-- [ ] les données échangées entre chaque couche
-- [ ] les algorithmes
-- [ ] les machines
-- [ ] les protocoles réseaux
+![Alt text](doc/diagramSequence.png)
 
 ## ✅ Pré-requis
 
