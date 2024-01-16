@@ -75,13 +75,10 @@ Et voila 👍
 
 ## 🧪 Tests
 
-### Définition du Plan de Test
+### Test fonctionnel
 
-[Expliquer ce qu'on attend quand on fait quoi.]
-
-### Étapes pour Lancer les Tests
-
-[ALED]
+Vous pouvez lancer le BOT de test en allant dans le répertoire : /tests/api/
+et en exécutant le fichier **AgentExemple.py**
 
 ## 🛣️ Roadmap
 
